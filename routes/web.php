@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\QueryCategoryManagementController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QueryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +25,22 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('createQuery', 'QueryController@create')->name('query.create');
+    Route::post('storeQuery', 'QueryController@store')->name('query.store');
+    Route::post('showQuery', 'QueryController@showCategory')->name('query.show');
+    //Route::resource('categoryManagement','CategoryManagementController');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('createCategory', 'QueryCategoryManagementController@create')->name('category.create');
+    Route::post('storeCategory', 'QueryCategoryManagementController@store')->name('category.store');
+    Route::post('showCategory', 'QueryCategoryManagementController@showCategory')->name('category.show');
+    //Route::resource('categoryManagement','CategoryManagementController');
+});
+
+Route::resources([    
+    'query' => QueryController::class,
+    'queryManagent' => QueryCategoryManagementController::class,
+]);
+
