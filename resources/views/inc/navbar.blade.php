@@ -22,7 +22,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Queries Mangament<span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu">                                              
                     <a class="dropdown-item" href="{{route ('category.create')}}">Create Query Category<span class="sr-only">(current)</span></a>
-                    <a class="dropdown-item" href="">View Query Category<span class="sr-only">(current)</span></a>                    
+                    <a class="dropdown-item" href="{{route ('category.index')}}">View Query Category<span class="sr-only">(current)</span></a>                    
                 </div>
             </li>
                        

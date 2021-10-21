@@ -36,6 +36,8 @@ Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(functio
     Route::get('createCategory', 'QueryCategoryManagementController@create')->name('category.create');
     Route::post('storeCategory', 'QueryCategoryManagementController@store')->name('category.store');
     Route::post('showCategory', 'QueryCategoryManagementController@showCategory')->name('category.show');
+    Route::get('indexCategory', 'QueryCategoryManagementController@index')->name('category.index');
+
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
