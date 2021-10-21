@@ -9,14 +9,8 @@
                     <div class="container">                    
                         <div class="row ">
                             <h1>
-                                Medicaments Products 
-                            </h1>
-                            <div class="float-right">
-                                <form class="form-inline float-right">
-                                    <input class="form-control pull-right" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                            </div>
+                                Querie Categories 
+                            </h1>                            
                         </div>
                     </div>
                 </div>                
