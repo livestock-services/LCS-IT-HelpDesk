@@ -57,7 +57,8 @@ class QueryCategoryManagementController extends Controller
      */
     public function show($id)
     {
-        //
+        $categories = Category::find($id);
+        return view('queryCategoryManagement.show')->with('categories',$categories);        
     }
 
     /**
@@ -68,7 +69,13 @@ class QueryCategoryManagementController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::find($id);
+         
+         /*if(auth()->user()->id !==$categories->user_id){
+            return redirect('categoriess')->with('error','Unauthorized Page');
+         }*/
+        
+        return view("queryCategoryManagement.edit")->with('categories',$categories);
     }
 
     /**
@@ -80,7 +87,18 @@ class QueryCategoryManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        
+        $categories =  Category::find($id);
+        $categories->title = $request->input('title');
+        $categories->body = $request->input('body');
+        
+        $categories->save();
+        
+        return redirect('/posts')->with('success', 'Post Updated');
     }
 
     /**

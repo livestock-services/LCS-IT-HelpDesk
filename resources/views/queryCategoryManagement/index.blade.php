@@ -19,8 +19,8 @@
                     @if(count($categories) > 0)
                     @foreach($categories as $categorie)
                         <div class="well">  
-                        <a href="queryManagent/showCategory/{{$categorie->id}}">                          
-                            <form method="POST" action="">
+                        <a href="{{$categorie->id}}">                          
+                            <!--<form method="POST" action="">-->
                                 @csrf
                                 <!-- {{ csrf_field() }} -->                                   
                                 <div class="col-sm">
@@ -34,10 +34,9 @@
                                                     <!--<button type="submit" class="btn btn-primary btn-block">SELECT</button>-->
                                                 </div>                                                
                                         </div>
-                                    </div>
-                                
+                                    </div>                                
                                 </div>                                                                   
-                            </form>  
+                            <!--</form>---> 
                             </a>                          
                         </div>                        
                     @endforeach

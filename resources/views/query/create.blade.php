@@ -12,14 +12,7 @@
 
                         <form method="POST" action="{{route('query.store')}}">
                             @csrf
-                            <!-- {{ csrf_field() }} -->                       
-                            <div class="form-group">
-                                <select name= "catergoryOfProduct" class="form-control" >
-                                    <option class="font-weight-bold" >
-                                        <b>Select Category</b>                                        
-                                    </option>                        
-                                </select>
-                            </div>  
+                            <!-- {{ csrf_field() }} -->  
                             
                             <div class="form-group">
                                 <select name= "catergoryOfProduct" class="form-control" >
