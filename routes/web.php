@@ -41,8 +41,19 @@ Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(functio
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
+
+Route::prefix('quickSolutions')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('createSolutions', 'QuickSolutionsController@create')->name('quick.create');
+    Route::post('storeSolutions', 'QuickSolutionsController@store')->name('quick.store');
+    Route::post('showSolutions', 'QuickSolutionsController@showCategory')->name('quick.show');
+    Route::get('indexSolutions', 'QuickSolutionsController@index')->name('quick.index');
+    //Route::resource('categoryManagement','CategoryManagementController');
+});
+
 Route::resources([    
     'query' => QueryController::class,
     'queryManagent' => QueryCategoryManagementController::class,
+    'quickSolutions' => QuickSolutionsController::class,
 ]);
+
 
