@@ -39,11 +39,13 @@ class QueryCategoryManagementController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'categoryName' => 'required'
+            'categoryName' => 'required',
+            'categoryDescription' => 'required'
         ]);
 
         $categories = new  Category();
         $categories->categoryName = $request->input('categoryName');
+        $categories->categoryDescription = $request->input('categoryDescription');
         $categories->save();
 
         return redirect('/home')->with('success','Category Created');

@@ -1,53 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="container">                    
-                        <div class="row ">
-                            <h1>
-                                Querie Categories 
-                            </h1>                            
-                        </div>
-                    </div>
-                </div>                
-                    <div class="card-body" > 
-                    <div class="row justify-content-center">                  
-                    @if(count($categories) > 0)
-                    @foreach($categories as $categorie)
-                        <div class="well">  
-                        <a href="{{$categorie->id}}">                          
-                            <!--<form method="POST" action="">-->
-                                @csrf
-                                <!-- {{ csrf_field() }} -->                                   
-                                <div class="col-sm">
-                                <!--h3></h3>--->
-                                <div class="card float-left" style="width: 14rem;  height: 10rem; margin-bottom: 2rem" >
-                                        <div class="card-body" >                                            
-                                            <h4 class="card-title">{{$categorie->categoryName}}</h4>
-                                                <div class="form-group row">                                            
-                                                    <input type="hidden" value="{{ $categorie->id }}" id="categorieId" class="form-control"
-                                                        name="categorieId">
-                                                    <!--<button type="submit" class="btn btn-primary btn-block">SELECT</button>-->
-                                                </div>                                                
-                                        </div>
-                                    </div>                                
-                                </div>                                                                   
-                            <!--</form>---> 
-                            </a>                          
-                        </div>                        
-                    @endforeach
-                    <br>
-                    @else
-                    <h1>categories</h1>    
-                        <h4>No Cateregories available at the moment</h4>
-                    @endif                                        
-                </div>               
-            </div>
+
+<!----CONDUSIVE --->
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Querie Categories</h2>
+          <p>View all Query Categories</p>
         </div>
-    </div>
-</div>
+        @if(count($categories) > 0)
+        @foreach($categories as $categorie)
+
+        <div class="row ">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title"><a href="{{$categorie->id}}">{{$categorie->categoryName}}</a></h4>
+              <input type="hidden" value="{{ $categorie->id }}" id="categorieId" class="form-control"name="categorieId">
+              <p class="description">{{$categorie->categoryDescription}}</p>
+            </div>
+          </div>
+
+          
+          @endforeach
+          @else
+            <h1>categories</h1>    
+                <h4>No Cateregories available at the moment</h4>
+            @endif 
+
+          
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
 @endsection

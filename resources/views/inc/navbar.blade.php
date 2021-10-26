@@ -112,7 +112,7 @@
                 </ul>
               </li>--->
               <li><a href="{{route ('category.create')}}">Create Query Category</a></li>
-              <li><a href="{{route ('category.index')}}">View past I.T Query</a></li>
+              <li><a href="{{route ('category.index')}}">View Query Categories</a></li>
               <!--<li><a href="#">Drop Down 2</a></li>
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>--->

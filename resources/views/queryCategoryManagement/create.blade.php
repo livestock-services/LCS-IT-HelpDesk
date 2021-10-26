@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
 </section><!-- End Clients Section -->
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>IT Category Query Form</h2>
@@ -13,18 +12,23 @@
         </div>
 
         <div class="row">
-
-          
-
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="2">
             <form action="{{route('category.store')}}" method="post" role="form" class="php-email-form">
-              
-              <div class="form-group mt-3">
-              <h5>
-                <label for="name" class="form-label">Enter Query Category</label>
-              </h5>
-                <textarea rows="5" type=" text" id="query" class="form-control" name="query"></textarea>
-              </div>              
+            @csrf
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <h5><label for="name" class="form-label">Enter Query Category</label></h5>
+                  <input type=" text" id="categoryName" class="form-control" name="categoryName"></input>
+                </div>
+                <div class="form-group col-md-6 mt-3 mt-md-0">
+                  <!---<h5><label for="name" class="form-label">Enter Category Description</label></h5>---->
+                  <!---<textarea rows="5" type=" text" id="categoryDescription" class="form-control" name="categoryDescription"></textarea>--->
+                  <h5><label for="name" class="form-label">Enter Category Description</label></h5>
+                  <textarea type="text" id="categoryDescription" class="form-control" rows="3" name="categoryDescription"></textarea>
+                  <!---<textarea class="form-control" id="categoryDescription" name="categoryDescription" rows="3" required></textarea>---->
+                </div>
+              </div>
+                            
               <div class="my-3">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
@@ -37,7 +41,7 @@
         </div>
 
       </div>
-</section>
+    </section>
 
 @endsection
 
