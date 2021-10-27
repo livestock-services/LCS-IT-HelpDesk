@@ -2,7 +2,7 @@
 
 @section('content')
 
-</section><!-- End Portfolio Section -->
+
 
     <!-- ======= F.A.Q Section ======= -->
     <section id="faq" class="faq section-bg">
