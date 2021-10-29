@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Facade\FlareClient\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QueryCategoryManagementController extends Controller
 {
@@ -48,7 +50,7 @@ class QueryCategoryManagementController extends Controller
         $categories->categoryDescription = $request->input('categoryDescription');
         $categories->save();
 
-        return redirect('/home')->with('success','Category Created');
+        return redirect('/queryManagent/indexCategory')->with('success','Category Created');
     }
 
     /**
@@ -60,7 +62,13 @@ class QueryCategoryManagementController extends Controller
     public function show($id)
     {
         $categories = Category::find($id);
-        return view('queryCategoryManagement.show')->with('categories',$categories);        
+        $subCategories = SubCategory::all();
+        $subCategories = DB::table('sub_categories')
+            ->where('categoryId','=',$id)
+            ->select('*')
+            ->orderBy('created_at','desc')
+            ->paginate(15);
+        return view('queryCategoryManagement.show')->with('categories',$categories)->with('subCategories',$subCategories);        
     }
 
     /**
@@ -90,17 +98,16 @@ class QueryCategoryManagementController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required'
+            'categoryName' => 'required',
+            'categoryDescription' => 'required'
         ]);
         
         $categories =  Category::find($id);
-        $categories->title = $request->input('title');
-        $categories->body = $request->input('body');
-        
+        $categories->categoryName = $request->input('categoryName');
+        $categories->categoryDescription = $request->input('categoryDescription');        
         $categories->save();
         
-        return redirect('/posts')->with('success', 'Post Updated');
+        return redirect('/queryManagent/indexCategory')->with('success', 'Post Updated');
     }
 
     /**

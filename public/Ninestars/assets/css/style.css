@@ -508,6 +508,7 @@ section {
 .services .icon-box {
   padding: 30px;
   position: relative;
+  width: -webkit-fill-available;
   overflow: hidden;
   margin: 0 0 40px 0;
   background: #fff;

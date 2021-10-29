@@ -40,9 +40,8 @@
             <a href="{{route ('query.create')}}" class="btn-get-started scrollto">Get Started</a>
           </div>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img">
-          <img src="assets/img/hero-img.svg" class="img-fluid animated" alt="">
-        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img ">
+       
       </div>
     </div>
 

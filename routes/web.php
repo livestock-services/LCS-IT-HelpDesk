@@ -37,6 +37,7 @@ Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(functio
     Route::post('storeCategory', 'QueryCategoryManagementController@store')->name('category.store');
     Route::post('showCategory', 'QueryCategoryManagementController@showCategory')->name('category.show');
     Route::get('indexCategory', 'QueryCategoryManagementController@index')->name('category.index');
+    Route::post('updateCategory', 'QueryCategoryManagementController@update')->name('category.update');
 
     //Route::resource('categoryManagement','CategoryManagementController');
 });
@@ -50,10 +51,22 @@ Route::prefix('quickSolutions')->namespace('App\Http\Controllers')->group(functi
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
+Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('createSubCategory/{id}', 'QuerySubCategoryManagementController@create')->name('subCategory.create');
+    Route::post('storeSubCategory', 'QuerySubCategoryManagementController@store')->name('subCategory.store');
+    Route::post('showSubCategory', 'QuerySubCategoryManagementController@showCategory')->name('subCategory.show');
+    Route::get('indexSubCategory', 'QuerySubCategoryManagementController@index')->name('subCategory.index');
+    Route::post('updateSubCategory', 'QuerySubCategoryManagementController@update')->name('subCategory.update');
+    //Route::resource('categoryManagement','CategoryManagementController');
+});
+
+
+
 Route::resources([    
     'query' => QueryController::class,
     'queryManagent' => QueryCategoryManagementController::class,
     'quickSolutions' => QuickSolutionsController::class,
+    'subQueryManagent' => QuerySubCategoryManagementController::class,
 ]);
 
 

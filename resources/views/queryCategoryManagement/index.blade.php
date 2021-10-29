@@ -27,11 +27,7 @@
           </div>
             <h1>categories</h1>    
                 <h4>No Cateregories available at the moment</h4>
-            @endif 
-
-          
-
-        
+            @endif  
 
       </div>
     </section><!-- End Services Section -->
