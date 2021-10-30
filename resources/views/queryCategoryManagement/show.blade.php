@@ -54,8 +54,11 @@
                         <li>
                             <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$subCategory->subCategoryDescription}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
                             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-                              <p>We work</p>
-                              
+                            <div class="button-box-az col-lg-12">
+                              <a href="{{ route('subCategory.edit',[$subCategory->id]) }}" class="btn btn-info" role="button">Edit</a>
+                              <a href="{{ route('subCategory.delete',[$subCategory->id]) }}" class="btn btn-danger" role="button">Delete</a>
+                            </div>
+                              <!---<button type="button" class="btn btn-custom-primary">Button</button>--->
                             </div>
                         </li>
                       @endforeach

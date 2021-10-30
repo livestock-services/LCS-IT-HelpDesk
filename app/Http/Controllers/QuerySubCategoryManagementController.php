@@ -40,10 +40,10 @@ class QuerySubCategoryManagementController extends Controller
             'subQueryCategory' => 'required'
         ]);
         $categoryId = $request->input('categoryId');
-        $subQueryCategories = new  SubCategory();
-        $subQueryCategories->categoryId = $request->input('categoryId');
-        $subQueryCategories->subCategoryDescription = $request->input('subQueryCategory');
-        $subQueryCategories->save();
+        $subQuerysubCategories = new  SubCategory();
+        $subQuerysubCategories->categoryId = $request->input('categoryId');
+        $subQuerysubCategories->subCategoryDescription = $request->input('subQueryCategory');
+        $subQuerysubCategories->save();
         //return $this->showSpecficCategory($categoryId);
         return redirect('/queryManagent/indexCategory')->with('success','SubCategory Created');
         //return redirect()->route('category.show', ['id'=>$categoryId])->with('success','SubCategory Created');
@@ -68,7 +68,8 @@ class QuerySubCategoryManagementController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subCategories = SubCategory::find($id);       
+        return view("subCategory.edit")->with('subCategories',$subCategories);        
     }
 
     /**
@@ -80,7 +81,15 @@ class QuerySubCategoryManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            
+            'subCategoryDescription' => 'required'
+        ]);        
+        $subCategories =  SubCategory::find($id);        
+        $subCategories->subCategoryDescription = $request->input('subCategoryDescription');        
+        $subCategories->save();
+        
+        return redirect('/queryManagent/indexCategory')->with('success', 'Post Updated');
     }
 
     /**
@@ -91,6 +100,8 @@ class QuerySubCategoryManagementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subCategories = SubCategory::find($id);
+        $subCategories->delete();
+        return redirect('/queryManagent/indexCategory')->with('success', 'SubCategory Deleted');
     }
 }

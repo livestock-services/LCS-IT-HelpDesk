@@ -56,7 +56,9 @@ Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(func
     Route::post('storeSubCategory', 'QuerySubCategoryManagementController@store')->name('subCategory.store');
     Route::post('showSubCategory', 'QuerySubCategoryManagementController@showCategory')->name('subCategory.show');
     Route::get('indexSubCategory', 'QuerySubCategoryManagementController@index')->name('subCategory.index');
-    Route::post('updateSubCategory', 'QuerySubCategoryManagementController@update')->name('subCategory.update');
+    Route::post('updateSubCategory/{id}', 'QuerySubCategoryManagementController@update')->name('subCategory.update');
+    Route::get('editSubCategory/{id}', 'QuerySubCategoryManagementController@edit')->name('subCategory.edit');
+    Route::get('deleteSubCategory/{id}', 'QuerySubCategoryManagementController@destroy')->name('subCategory.delete');
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 

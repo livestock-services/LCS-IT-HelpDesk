@@ -100,8 +100,7 @@ class QueryCategoryManagementController extends Controller
         $this->validate($request, [
             'categoryName' => 'required',
             'categoryDescription' => 'required'
-        ]);
-        
+        ]);        
         $categories =  Category::find($id);
         $categories->categoryName = $request->input('categoryName');
         $categories->categoryDescription = $request->input('categoryDescription');        
@@ -118,6 +117,12 @@ class QueryCategoryManagementController extends Controller
      */
     public function destroy($id)
     {
+        $checkIfCategoryHasSubCategory = $this->checkIfCategoryHasSubCategory($id);
+        
+        $subCategories = SubCategory::find($id);
+        $subCategories->delete();
+        return redirect('/queryManagent/indexCategory')->with('success', 'SubCategory Deleted');
+        
         //
     }
 }

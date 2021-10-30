@@ -27,4 +27,8 @@ class Controller extends BaseController
         return view('queryCategoryManagement.show')->with('categories',$categories)->with('subCategories',$subCategories);        
     }*/
 
+    public function checkIfCategoryHasSubCategory($id){
+
+    }
+
 }

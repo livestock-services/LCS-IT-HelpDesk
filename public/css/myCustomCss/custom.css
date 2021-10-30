@@ -2447,9 +2447,15 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #3490dc;
-  border-color: #3490dc;
+  background-color: #eb5d1e;;
+  border-color: #eb5d1e;
 }
+
+.button-box-az {
+  text-align:center;
+  margin-top:20px;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #227dc7;
