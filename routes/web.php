@@ -72,3 +72,6 @@ Route::resources([
 ]);
 
 
+Route::get('getCategories', 'DynamicCategoryController@getCategories');
+Route::get('getSubCategories', 'DynamicCategoryController@getSubCategories');
+
