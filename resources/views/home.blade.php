@@ -37,7 +37,7 @@
           <h1>Welcome to the Livestock Services I.T Help Desk</h1>
           <h2>To submit your I.T Query, please click the button below</h2>
           <div>
-            <a href="{{route ('query.create')}}" class="btn-get-started scrollto">Get Started</a>
+            <a href="{{route ('query.showQueryCategories')}}" class="btn-get-started scrollto">Get Started</a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img ">

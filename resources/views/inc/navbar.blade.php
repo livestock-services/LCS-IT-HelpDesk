@@ -15,7 +15,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">I.T Queries<span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu">                                              
-                    <a class="dropdown-item" href="{{route ('query.create')}}">Send an I.T Query<span class="sr-only">(current)</span></a>
+                    <a class="dropdown-item" href="{{route ('query.showQueryCategories')}}">Sendss an I.T Query<span class="sr-only">(current)</span></a>
                     <a class="dropdown-item" href="">View past I.T Query<span class="sr-only">(current)</span></a>                    
                 </div>
             </li>
@@ -92,7 +92,7 @@
                   <li><a href="#">Deep Drop Down 3</a></li>                  
                 </ul>
               </li>--->
-              <li><a href="{{route ('query.create')}}">Send an I.T Query</a></li>
+              <li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>
               <li><a href="#">View past I.T Query</a></li>
               <!--<li><a href="#">Drop Down 2</a></li>              
               <li><a href="#">Drop Down 4</a></li>--->

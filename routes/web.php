@@ -4,7 +4,7 @@ use App\Http\Controllers\QueryCategoryManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QueryController;
-
+use App\Http\Livewire\CategorySubCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +24,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('dynamicDrpdown', CategorySubCategory::class);
 Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
     Route::get('createQuery', 'QueryController@create')->name('query.create');
     Route::post('storeQuery', 'QueryController@store')->name('query.store');
     Route::post('showQuery', 'QueryController@showCategory')->name('query.show');
+    Route::get('showQueryCategories','QueryController@showQueryCategories')->name('query.showQueryCategories');
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
@@ -63,7 +64,7 @@ Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(func
 });
 
 
-
+Route::view('states-city','livewire.home');
 Route::resources([    
     'query' => QueryController::class,
     'queryManagent' => QueryCategoryManagementController::class,

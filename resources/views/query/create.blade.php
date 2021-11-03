@@ -10,37 +10,41 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>IT Query Form</h2>
-          <p>Submit your Query</p>
+          <h2>{{$categories->categoryName}} Query Form</h2>
+          <p>Please enter your {{$categories->categoryName}} related Query</p>
         </div>
 
         <div class="row">
 
-          
-
+        
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="2">
             <form action="{{route('query.store')}}" method="post" role="form" class="php-email-form">
+            @csrf
               <div class="row">
-                <div class="form-group col-md-6">
-                    <select name= "catergoryOfProduct" class="form-control" >
-                        <option class="font-weight-bold" >
-                            <b>Select First Category</b>                                        
-                        </option>                        
-                    </select>
-                </div>
-                <div class="form-group col-md-6 mt-3 mt-md-0">
-                    <select name= "catergoryOfProduct" class="form-control" >
-                        <option class="font-weight-bold" >
-                            <b>Select Second Category</b>                                        
-                        </option>                        
-                    </select>
-                </div>
+              @if(count($subCategories) > 0)
+                <div class="form-group mt-3">
+                  <select name= "subCategoryId"class="form-control" >
+                    <option class="font-weight-bold" ><b>Select Category</b></option>
+                     @foreach ($subCategories as $subCategorie)
+                        <option class="font-weight-bold" value="{{ $subCategorie->id }}"}}> 
+                          <b>{{$subCategorie->subCategoryDescription}}</b>
+                        </option>
+                    @endforeach  
+                  </select>
+                </div>                               
+               @else
+              <select name= "subCategoryId"class="form-control" >
+                <option class="font-weight-bold" ><b>NO OPTIONS AVAILABLE</b></option>
+              </select>                               
+              @endif                
               </div>
+
               <div class="form-group mt-3">
               <h5>
-                <label for="name" class="form-label">Enter query</label>
+                <label for="query" class="form-label">Enter Description</label>
               </h5>
-                <textarea rows="5" type=" text" id="query" class="form-control" name="query"></textarea>
+                <textarea rows="5" type=" text" id="queryDetails" class="form-control" name="queryDetails"></textarea>
+                <input type="hidden" value="{{ $categories->id }}" id="categorieId" class="form-control"name="categorieId">
               </div>              
               <div class="my-3">
                 <div class="loading">Loading</div>
