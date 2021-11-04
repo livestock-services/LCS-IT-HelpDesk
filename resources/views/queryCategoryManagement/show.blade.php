@@ -39,7 +39,7 @@
             
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch " data-aos="fade-up" data-aos-delay="100" style="width: -webkit-fill-available;">
                 <!-- ======= F.A.Q Section ======= -->
-                <section id="faq" class="faq section-bg">
+                <section id="faq" class="faq section-bg" style="width: 100%;">
                 <div class="container" data-aos="fade-up">
 
                     <div class="section-title">

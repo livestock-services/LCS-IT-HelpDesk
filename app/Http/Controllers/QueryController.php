@@ -17,7 +17,15 @@ class QueryController extends Controller
      */
     public function index()
     {
-        //
+        $userId= auth()->user()->id;
+        $queries = Query::find($userId);
+        $queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('categories','sub_categories.categoryId','=','categories.id')
+            ->where('userId','=',$userId)
+            ->select('queries.id','queries.priorityCode','queries.queryDetails','categories.categoryName','categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->get();
+        return view("query.index")->with('queries',$queries);
     }
 
     /**
@@ -33,7 +41,19 @@ class QueryController extends Controller
 
     public function showQueryCategories(){
         $categories = Category::all();
-        return view("query.index")->with('categories',$categories);
+        return view("query.showQueryCategories")->with('categories',$categories);
+    }
+
+    public function createQueryWithinCategory($id)
+    {
+        $categories = Category::find($id);
+        $subCategories = SubCategory::all();
+        $subCategories = DB::table('sub_categories')
+            ->where('categoryId','=',$id)
+            ->select('*')
+            ->orderBy('created_at','desc')
+            ->get();
+        return view("query.create")->with('categories',$categories)->with('subCategories',$subCategories);
     }
 
     /**
@@ -71,14 +91,14 @@ class QueryController extends Controller
     public function show($id)
     {
 
-        $categories = Category::find($id);
+        /*$categories = Category::find($id);
         $subCategories = SubCategory::all();
         $subCategories = DB::table('sub_categories')
             ->where('categoryId','=',$id)
             ->select('*')
             ->orderBy('created_at','desc')
             ->get();
-        return view("query.create")->with('categories',$categories)->with('subCategories',$subCategories);
+        return view("query.create")->with('categories',$categories)->with('subCategories',$subCategories);*/
     }
 
     /**

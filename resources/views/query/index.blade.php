@@ -1,34 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- ======= F.A.Q Section ======= -->
+    <section id="faq" class="faq section-bg">
+        <div class="container" data-aos="fade-up">
 
-<!----CONDUSIVE --->
-<!-- ======= Services Section ======= -->
-<section id="services" class="services section-bg">
-    <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>I.T Querie Categories</h2>
-          <p>Select The Category In Which Your Querie Falls</p>
-        </div>
-        <div class="row ">
-        @if(count($categories) > 0)
-        @foreach($categories as $categorie)        
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="{{$categorie->id}}">{{$categorie->categoryName}}</a></h4>
-              <input type="hidden" value="{{ $categorie->id }}" id="categorieId" class="form-control"name="categorieId">
-              <p class="description">{{$categorie->categoryDescription}}</p>
+            <div class="section-title">
+                <h2>Past Queries</h2>
+                <p>IT Queries Made</p>
             </div>
-          </div>          
-          @endforeach
-          @else
-          </div>
-            <h1>categories</h1>    
-                <h4>No Cateregories available at the moment</h4>
-            @endif  
 
-      </div>
-    </section><!-- End Services Section -->
+            <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+
+            @if(count($queries) > 0)
+                @foreach($queries as $query)
+                <li>
+                    <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                        <div class="button-box-az col-lg-12">
+                            <a href="query/{{$query->id}}" class="btn btn-info" role="button">View</a>
+                            
+                        </div>
+                        <!---<button type="button" class="btn btn-custom-primary">Button</button>--->
+                    </div>
+                </li>
+                @endforeach
+            @else
+            <li>
+                <div data-bs-toggle="" class="collapsed question" href="#faq1">No i.t queries have been made on this user account<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                
+                </div>
+            </li
+            @endif
+            </ul>
+        </div>
+    </section>   
 @endsection

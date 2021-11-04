@@ -29,6 +29,8 @@ Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
     Route::get('createQuery', 'QueryController@create')->name('query.create');
     Route::post('storeQuery', 'QueryController@store')->name('query.store');
     Route::post('showQuery', 'QueryController@showCategory')->name('query.show');
+    Route::get('createQueryWithinCategory/{id}', 'QueryController@createQueryWithinCategory')->name('query.createQueryWithinCategory');
+    Route::get('indexQuery', 'QueryController@index')->name('query.index');
     Route::get('showQueryCategories','QueryController@showQueryCategories')->name('query.showQueryCategories');
     //Route::resource('categoryManagement','CategoryManagementController');
 });
