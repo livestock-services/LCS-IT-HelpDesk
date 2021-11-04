@@ -50,14 +50,16 @@ class QueryController extends Controller
             'categorieId' => 'required'
         ]);
 
-        
+        $userId= auth()->user()->id;
 
         $query = new  Query();
-        $query->categoryName = $request->input('categoryName');
-        $query->categoryDescription = $request->input('categoryDescription');
+        $query->queryDetails = $request->input('queryDetails');
+        $query->categoryId = $request->input('categorieId');
+        $query->subCategory = $request->input('subCategoryId');
+        $query->userId = $userId;
         $query->save();
 
-        return redirect('/queryManagent/indexCategory')->with('success','Category Created');
+        return redirect('/home')->with('success','Category Created');
     }
 
     /**
