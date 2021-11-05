@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dynamicDrpdown', CategorySubCategory::class);
+
 Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
     Route::get('createQuery', 'QueryController@create')->name('query.create');
     Route::post('storeQuery', 'QueryController@store')->name('query.store');
