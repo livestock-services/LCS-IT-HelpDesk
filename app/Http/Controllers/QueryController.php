@@ -90,15 +90,17 @@ class QueryController extends Controller
      */
     public function show($id)
     {
-
-        /*$categories = Category::find($id);
-        $subCategories = SubCategory::all();
+        //print("show");
+        $query = Query::find($id);
+        /*$subCategories = SubCategory::all();
         $subCategories = DB::table('sub_categories')
             ->where('categoryId','=',$id)
             ->select('*')
             ->orderBy('created_at','desc')
-            ->get();
-        return view("query.create")->with('categories',$categories)->with('subCategories',$subCategories);*/
+            ->get();*/
+        return view("query.show")->with('categories',$query);
+
+        //return view('query.show');
     }
 
     /**
