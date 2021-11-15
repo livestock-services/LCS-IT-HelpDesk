@@ -21,13 +21,13 @@
                 <p>"To be inseted"</p>
               </div>
 
-              <a href="{{$categories->id}}/edit"><div class="email">
+              <a href=""><div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Assinged:</h4>
                 <p>"To be inserted"</p>
               </div></a>
 
-              <a href="{{ route('subCategory.create',[$categories->id]) }}"><div class="phone">
+              <a href=""><div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Add Sub Category:</h4>
                 <p>Register a new Sub Category under</p>
@@ -47,23 +47,13 @@
                     <p> Sub Categories</p>
                     </div>
 
-                    <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
-
-                    
-                    <li>
-                        <div data-bs-toggle="" class="collapsed question" href="#faq1">No Sub Categories available<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-                        <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-                        
-                        </div>
-                    </li>
-                    
-
-                    
-
-                    
-
+                    <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">                    
+                      <li>
+                          <div data-bs-toggle="" class="collapsed question" href="#faq1">No Sub Categories available<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                          <div id="faq1" class="collapse" data-bs-parent=".faq-list">                          
+                          </div>
+                      </li>
                     </ul>
-
                 </div>
             </section>           
           </div>

@@ -1,18 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Category Management</h2>
           <p>{{$categories->categoryName}} Related Query Management</p>
         </div>
 
         <div class="row">
-
           <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="info">
               <div class="address">
