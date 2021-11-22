@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\QueryAssignedToTechPersonel;
 use App\Models\SubCategory;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -29,6 +30,14 @@ class Controller extends BaseController
 
     public function checkIfCategoryHasSubCategory($id){
 
+    }
+
+    public function checkIfQuerieIsAssignedToItStaffMember($id){
+                
+        $checkQueryAssignment = DB::table('query_assigned_to_tech_personels')
+            ->where('queryId','=', $id)
+            ->count();
+        return $checkQueryAssignment;
     }
 
 }

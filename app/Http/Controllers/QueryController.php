@@ -90,17 +90,26 @@ class QueryController extends Controller
      */
     public function show($id)
     {
-        //print("show");
-        //$query = Query::find($id);
-        //$subCategories = SubCategory::all();
-        $queries = DB::table('queries')
-            ->where('id','=',$id)
-            ->select('*')
-            ->orderBy('created_at','desc')
-            ->get();
-        return view("query.show")->with('queries',$queries);
+        $checkIfQueryIsAssinged = $this->checkIfQuerieIsAssignedToItStaffMember($id);
 
-        //return view('query.show');
+        if($checkIfQueryIsAssinged > 0){
+            $queries = DB::table('queries')
+                ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')                
+                ->where('queries.id','=',$id)
+                ->select('admins.name','queries.statusId','queries.queryDetails')                
+                ->get();
+            return view("query.show")->with('queries',$queries);
+        }else{            
+            $queries = Query::find($id);
+            $queries = DB::table('queries')
+                ->join('','','','')
+                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')                
+                ->where('queries.id','=',$id)
+                ->select('admins.name','queries.statusId','queries.queryDetails')                
+                ->get();
+            return view("query.showUnAssinged")->with('queries',$queries);            
+        }       
     }
 
     /**
