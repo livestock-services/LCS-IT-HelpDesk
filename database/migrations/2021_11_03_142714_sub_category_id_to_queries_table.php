@@ -14,7 +14,7 @@ class SubCategoryIdToQueriesTable extends Migration
     public function up()
     {
         Schema::table('queries', function (Blueprint $table) {
-            $table->string('subCategory');
+            $table->integer('subCategory');
         });
     }
 

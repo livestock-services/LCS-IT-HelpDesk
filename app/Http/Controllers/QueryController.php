@@ -91,22 +91,21 @@ class QueryController extends Controller
     public function show($id)
     {
         $checkIfQueryIsAssinged = $this->checkIfQuerieIsAssignedToItStaffMember($id);
-
         if($checkIfQueryIsAssinged > 0){
             $queries = DB::table('queries')
                 ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
-                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')                
-                ->where('queries.id','=',$id)
-                ->select('admins.name','queries.statusId','queries.queryDetails')                
+                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+                ->where('queries.id','=', $id)
+                ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
                 ->get();
             return view("query.show")->with('queries',$queries);
-        }else{            
-            $queries = Query::find($id);
+        }else{           
             $queries = DB::table('queries')
-                ->join('','','','')
-                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')                
-                ->where('queries.id','=',$id)
-                ->select('admins.name','queries.statusId','queries.queryDetails')                
+                //->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')                
+                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+                ->where('queries.id','=', $id)
+                ->select('queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
                 ->get();
             return view("query.showUnAssinged")->with('queries',$queries);            
         }       

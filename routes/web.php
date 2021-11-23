@@ -79,3 +79,15 @@ Route::resources([
 Route::get('getCategories', 'DynamicCategoryController@getCategories');
 Route::get('getSubCategories', 'DynamicCategoryController@getSubCategories');
 
+Route::group(['middleware' => ['auth:admin']], function() {
+    Route::get('/users', [UserController::class, 'users']);
+  });
+
+Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+    //Login Routes
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/login', 'Auth\AdminLoginController@showAdminLoginForm')->name('admin.login');
+        Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    });    
+    //Forgot Password Routes
+});
