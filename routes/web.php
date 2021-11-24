@@ -85,9 +85,26 @@ Route::group(['middleware' => ['auth:admin']], function() {
 
 Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
     //Login Routes
-    Route::group(['middleware' => 'guest'], function () {
+    /*Route::group(['middleware' => 'guest'], function () {
         Route::get('/login', 'Auth\AdminLoginController@showAdminLoginForm')->name('admin.login');
         Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    });    
+    });*/   
     //Forgot Password Routes
+    Route::get('/adminDashboard','HomeController@index')->name('home');
+    Route::namespace('Auth')->group(function(){
+        
+        //Login Routes
+        Route::get('/login','LoginController@showLoginForm')->name('admin.login');
+        Route::post('/login','LoginController@login')->name('admin.login.submit');
+        Route::post('/logout','LoginController@logout')->name('logout');
+    
+        //Forgot Password Routes
+        Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
+        Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    
+        //Reset Password Routes
+        Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+    
+    });
 });
