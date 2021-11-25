@@ -96,7 +96,7 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function 
         //Login Routes
         Route::get('/login','LoginController@showLoginForm')->name('admin.login');
         Route::post('/login','LoginController@login')->name('admin.login.submit');
-        Route::post('/logout','LoginController@logout')->name('logout');
+        Route::post('/logout','LoginController@logout')->name('admin.logout');
     
         //Forgot Password Routes
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');

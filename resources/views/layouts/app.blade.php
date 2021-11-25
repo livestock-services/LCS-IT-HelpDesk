@@ -49,6 +49,13 @@
 <body>
     <div id="app">
         @include('inc.navbar')
+        @if(Auth::guard('web')->check())
+          @include('inc.navbar')  
+        @elseif(Auth::guard('admin'))
+          @include('inc.navbarAdmin')
+        @else
+          @include('inc.navbar')
+        @endif
         <main class="py-4">
             @include('inc.messages')
             @yield('content')
