@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest:web,admin',['except'=>['logout']]);
-    }
+    
     protected $redirectTo = '/';
 
     public function showAdminLoginForm()

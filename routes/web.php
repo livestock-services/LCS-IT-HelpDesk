@@ -46,7 +46,6 @@ Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(functio
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
-
 Route::prefix('quickSolutions')->namespace('App\Http\Controllers')->group(function () {
     Route::get('createSolutions', 'QuickSolutionsController@create')->name('quick.create');
     Route::post('storeSolutions', 'QuickSolutionsController@store')->name('quick.store');
@@ -66,14 +65,22 @@ Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(func
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
-
 Route::view('states-city','livewire.home');
 Route::resources([    
     'query' => QueryController::class,
     'queryManagent' => QueryCategoryManagementController::class,
     'quickSolutions' => QuickSolutionsController::class,
     'subQueryManagent' => QuerySubCategoryManagementController::class,
+    'adminQueryManagement' => AdminQueryController::class,
 ]);
+
+Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('indexOfQueries', 'AdminQueryController@index')->name('adminQueries.index');
+    //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');
+
+});
+
+
 
 
 Route::get('getCategories', 'DynamicCategoryController@getCategories');

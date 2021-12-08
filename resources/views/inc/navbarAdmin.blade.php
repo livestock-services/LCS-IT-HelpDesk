@@ -1,7 +1,7 @@
 <!---<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
     <div class="container">
     <a class="navbar-brand" href="{{ url('/home') }}">
-        <!---{{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
+        {{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
     </a>    
 </div>
 </nav>--->
@@ -33,10 +33,9 @@
                   <li><a href="#">Deep Drop Down 3</a></li>                  
                 </ul>
               </li>--->
-              <li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>
-              <li><a href="{{route ('query.index')}}">View past I.T Query</a></li>
-              <!--<li><a href="#">Drop Down 2</a></li>              
-              <li><a href="#">Drop Down 4</a></li>--->
+              <!--<li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>--->
+              <li><a href="{{route ('adminQueries.index')}}">View I.T Queries</a></li>
+              
             </ul>
           </li>
 
