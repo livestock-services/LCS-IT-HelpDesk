@@ -76,6 +76,8 @@ Route::resources([
 
 Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(function () {
     Route::get('indexOfQueries', 'AdminQueryController@index')->name('adminQueries.index');
+    Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
+
     //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');
 
 });

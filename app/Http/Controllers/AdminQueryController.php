@@ -61,7 +61,15 @@ class AdminQueryController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $queries = DB::table('queries')
+        //->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')                
+        ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+        ->where('queries.id','=', $id)
+        ->select('queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+        ->get();
+    
+        return view("adminQueryManager.show")->with('queries',$queries);
     }
 
     /**

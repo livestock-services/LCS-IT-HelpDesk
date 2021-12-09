@@ -18,7 +18,7 @@
                     <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
                     <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                         <div class="button-box-az col-lg-12">
-                            <a href="{{$query->id}}" class="btn btn-info" role="button">View</a>
+                            <a href="{{ route('adminQueries.show',[$query->id]) }}" class="btn btn-info" role="button">View</a>
                             
                         </div>
                         <!---<button type="button" class="btn btn-custom-primary">Button</button>--->
