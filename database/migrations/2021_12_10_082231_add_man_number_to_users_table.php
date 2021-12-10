@@ -14,7 +14,7 @@ class AddManNumberToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('manNumberphp artisan m');
+            $table->string('manNumber');
         });
     }
 
