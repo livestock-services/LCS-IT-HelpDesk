@@ -34,7 +34,10 @@
                 </ul>
               </li>--->
               <!--<li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>--->
-              <li><a href="{{route ('adminQueries.index')}}">View I.T Queries</a></li>
+              <li><a href="{{route ('newQueriesAdmin.index')}}">New I.T Queries</a></li>
+              <li><a href="{{route ('assingedQueriesAdmin.index')}}">Assinged I.T Queries</a></li>
+              <li><a href="{{route ('clearedQueriesAdmin.index')}}">Cleared I.T Queries</a></li>
+              <li><a href="">I.T Query Analytics</a></li>
               
             </ul>
           </li>

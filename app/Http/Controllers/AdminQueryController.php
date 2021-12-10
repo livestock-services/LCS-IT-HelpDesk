@@ -19,17 +19,45 @@ class AdminQueryController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function indexNewQueries()
     {
         //$userId= auth()->user()->id;
         //$queries = Query::find($userId);
         $queries = DB::table('queries')
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
             ->join('categories','sub_categories.categoryId','=','categories.id')
-            //->where('userId','=',$userId)
+            ->where('queries.queryType','=', 1 )
             ->select('queries.id','queries.priorityCode','queries.queryDetails','categories.categoryName','categories.categoryDescription','sub_categories.subCategoryDescription')
             ->get();
         return view("adminQueryManager.index")->with('queries',$queries);
+    }
+
+    public function indexAssingedQueries()
+    {
+        //$userId= auth()->user()->id;
+        //$queries = Query::find($userId);
+        $queries = DB::table('queries')
+                ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+                ->where('queries.queryType','=', 2 )
+                ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+                ->get();
+        return view("query.show")->with('queries',$queries);
+    }
+
+    public function indexClearedQueries()
+    {
+        //$userId= auth()->user()->id;
+        //$queries = Query::find($userId);
+        $queries = DB::table('queries')
+            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->where('queries.queryType','=', 3 )
+            ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();
+        return view("query.show")->with('queries',$queries);
     }
 
     /**
