@@ -56,7 +56,8 @@
                       <li>
                           <div data-bs-toggle="" class="collapsed question" href="#faq1">{{$querie->queryDetails}}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
                           <div id="faq1" class="collapse" data-bs-parent=".faq-list">                          
-                          </div>
+                              
+                        </div>
                       </li>
                     </ul>
                 </div>

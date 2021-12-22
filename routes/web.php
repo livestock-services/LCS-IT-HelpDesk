@@ -66,13 +66,19 @@ Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(func
 });
 
 Route::view('states-city','livewire.home');
+
 Route::resources([    
     'query' => QueryController::class,
     'queryManagent' => QueryCategoryManagementController::class,
     'quickSolutions' => QuickSolutionsController::class,
     'subQueryManagent' => QuerySubCategoryManagementController::class,
     'adminQueryManagement' => AdminQueryController::class,
+    //'assignITStaff' => AssignITStaffMemberController::class,
 ]);
+
+Route::prefix('assignITStaff')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('viewITStaffMembers', 'AssignITStaffMemberController@index')->name('viewITStaffMembers.index');
+});
 
 Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(function () {
     Route::get('viewNewQueries', 'AdminQueryController@indexNewQueries')->name('newQueriesAdmin.index');
@@ -83,6 +89,8 @@ Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(fun
     //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');
 
 });
+
+
 
 
 
@@ -118,4 +126,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function 
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
     
     });
+});
+
+Route::group(['prefix' => 'adminControl'], function () {
+    Voyager::routes();
 });

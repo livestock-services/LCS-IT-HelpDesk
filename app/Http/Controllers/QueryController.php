@@ -26,9 +26,9 @@ class QueryController extends Controller
         $queries = Query::find($userId);
         $queries = DB::table('queries')
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-            ->join('categories','sub_categories.categoryId','=','categories.id')
+            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
             ->where('userId','=',$userId)
-            ->select('queries.id','queries.priorityCode','queries.queryDetails','categories.categoryName','categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->select('queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
             ->get();
         return view("query.index")->with('queries',$queries);
     }

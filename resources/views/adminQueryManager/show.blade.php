@@ -8,7 +8,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Query Viewer</h2>
+          <h2>Unassinged Query Viewer</h2>
           <p>View Query Details </p>
         </div>
 
@@ -26,11 +26,12 @@
                 @endif
               </div>
 
+              <a href="{{route('viewITStaffMembers.index')}}">
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Assinged To:</h4>
                 <p>Pending</p>
-              </div>
+              </div></a>
 
               <!--<a href=""><div class="phone">
                 <i class="bi bi-phone"></i>
@@ -56,7 +57,8 @@
                       <li>
                           <div data-bs-toggle="" class="collapsed question" href="#faq1">{{$querie->queryDetails}}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
                           <div id="faq1" class="collapse" data-bs-parent=".faq-list">                          
-                          </div>
+                            
+                        </div>
                       </li>
                     </ul>
                 </div>
