@@ -9,22 +9,36 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>F.A.Q</h2>
-          <p>Frequently Asked Questions</p>
+          <h2>Administrators</h2>
+          <p>IT Staff Members</p>
         </div>
-
-        <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
-
-          <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-            <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-              </p>
-            </div>
-          </li>
-        </ul>
-
+        @if(count($iTStaffs) > 0)
+          @foreach($iTStaffs as $iTStaff)
+            <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+            
+              <li>
+                <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$iTStaff->name}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                  <div class="button-box-az col-lg-12">
+                    <a href="{{ route('assignQuery.select',['query'=>$queryId,'adminId'=>$iTStaff->id]) }}" class="btn btn-success" role="button">Assign</a> 
+                    <a href="{{ route('showITStaffMember.show',[$iTStaff->id]) }}" class="btn btn-info" role="button">View</a>                             
+                  </div>
+                </div>
+              </li>
+            </ul>
+            @endforeach
+            @else
+            <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">            
+              <li>
+                <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">No Admin Accounts available <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                  <p>
+                    No Admin Accounts available
+                  </p>
+                </div>
+              </li>
+            </ul>
+            @endif
       </div>
     </section>
 @endsection

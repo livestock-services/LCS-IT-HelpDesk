@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
 use Illuminate\Http\Request;
 
-class AssignITStaffMemberController extends Controller
+class ITStaffManagementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,15 +13,12 @@ class AssignITStaffMemberController extends Controller
      */
     public function index()
     {
-        $iTStaffs = Admin::all();
-        return view("assignItStaffMember.index")->with('iTStaffs', $iTStaffs);
+        //
     }
 
-    public function showITStaffMembers($queryId){
-        $iTStaffs = Admin::all();
-        return view("assignItStaffMember.index")->with('iTStaffs', $iTStaffs)->with('queryId', $queryId);
+    public function showITStaffMember(){
+        
     }
-
     /**
      * Show the form for creating a new resource.
      *

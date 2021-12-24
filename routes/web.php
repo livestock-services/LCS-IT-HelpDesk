@@ -73,11 +73,12 @@ Route::resources([
     'quickSolutions' => QuickSolutionsController::class,
     'subQueryManagent' => QuerySubCategoryManagementController::class,
     'adminQueryManagement' => AdminQueryController::class,
+    'itStaffManagement' => ITStaffManagementController::class,
     //'assignITStaff' => AssignITStaffMemberController::class,
 ]);
 
 Route::prefix('assignITStaff')->namespace('App\Http\Controllers')->group(function () {
-    Route::get('viewITStaffMembers', 'AssignITStaffMemberController@index')->name('viewITStaffMembers.index');
+    Route::get('viewITStaffMembers/{id}', 'AssignITStaffMemberController@showITStaffMembers')->name('viewITStaffMembers.index');
 });
 
 Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(function () {
@@ -85,9 +86,13 @@ Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(fun
     Route::get('viewAssingedQueries', 'AdminQueryController@indexAssingedQueries')->name('assingedQueriesAdmin.index');
     Route::get('viewClearedQueries', 'AdminQueryController@indexClearedQueries')->name('clearedQueriesAdmin.index');
     Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
+    Route::get('assingItQuery/{query}/{adminId}', 'AdminQueryController@assignQuery')->name('assignQuery.select');
 
     //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');
+});
 
+Route::prefix('itStaffManagement')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('showITStaffMember/{id}','ITStaffManagementController@showITStaffMember')->name('showITStaffMember.show');
 });
 
 

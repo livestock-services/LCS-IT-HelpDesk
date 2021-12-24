@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Query;
+use App\Models\QueryAssignedToTechPersonel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -94,7 +95,7 @@ class AdminQueryController extends Controller
         //->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')                
         ->join('sub_categories','queries.subCategory','=','sub_categories.id')
         ->where('queries.id','=', $id)
-        ->select('queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+        ->select('queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
         ->get();
     
         return view("adminQueryManager.show")->with('queries',$queries);
@@ -109,6 +110,15 @@ class AdminQueryController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function assignQuery($queryId, $adminId){
+        $newQuery = new QueryAssignedToTechPersonel;
+        $newQuery->queryId = $queryId;
+        $newQuery->itPersonelId = $adminId;
+        $newQuery->save();
+
+        return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
     }
 
     /**

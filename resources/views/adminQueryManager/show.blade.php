@@ -26,7 +26,7 @@
                 @endif
               </div>
 
-              <a href="{{route('viewITStaffMembers.index')}}">
+              <a href="{{route('viewITStaffMembers.index',[$querie->id])}}">
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Assinged To:</h4>
