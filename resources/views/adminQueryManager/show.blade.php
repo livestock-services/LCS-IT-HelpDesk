@@ -26,17 +26,17 @@
                 <i class="bi bi-geo-alt"></i>
                 <h4>Status:</h4>
                 @if($querie->statusId == 1)
-                <p>Pending</p>
+                <p style="color:red;"><b>Pending</b></p>
                 @else
-                <p>Completed</p>
+                <p style="color:green;"><b>Completed</b></p>
                 @endif
               </div>
 
               <a href="{{route('viewITStaffMembers.index',[$querie->id])}}">
               <div class="email">
                 <i class="bi bi-envelope"></i>
-                <h4>Assinged To:</h4>
-                <p>Pending</p>
+                <h4>Assign To I.T Staff</h4>
+               
               </div></a>
 
               <!--<a href=""><div class="phone">

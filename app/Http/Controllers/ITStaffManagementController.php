@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ITStaffManagementController extends Controller
 {
@@ -16,8 +18,18 @@ class ITStaffManagementController extends Controller
         //
     }
 
-    public function showITStaffMember(){
-        
+    public function showITStaffMember($staffMemberId){
+
+        $staffMemberQueries = DB::table('admins')
+            ->join('','','=','')
+            ->join('','','=','')
+            ->where('','=','')
+            ->where('','=','')
+            ->select('','','','','')
+            ->get();
+        //return $staffMemberDetails;
+
+        return view("iTStaffManagement.showItStaffMember")->with('staffMemberQueries', $staffMemberQueries);
     }
     /**
      * Show the form for creating a new resource.
