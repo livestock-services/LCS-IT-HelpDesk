@@ -27,8 +27,9 @@ class AdminQueryController extends Controller
         $queries = DB::table('queries')
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
             ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
+            ->join('users','queries.userId','=','users.id')
             ->where('queries.queryType','=', 1 )
-            ->select('queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->select('users.email','users.name','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
             ->get();
         return view("adminQueryManager.index")->with('queries',$queries);
     }
@@ -41,10 +42,11 @@ class AdminQueryController extends Controller
                 ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
                 ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
                 ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+                ->join('users','queries.userId','=','users.id')
                 ->where('queries.queryType','=', 2 )
-                ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+                ->select('users.email','users.name','queries.id','admins.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
                 ->get();
-        return view("query.show")->with('queries',$queries);
+        return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
 
     public function indexClearedQueries()
@@ -55,10 +57,11 @@ class AdminQueryController extends Controller
             ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
             ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('users','queries.userId','=','users.id')
             ->where('queries.queryType','=', 3 )
-            ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->select('users.email','users.name','queries.id','admins.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
             ->get();
-        return view("query.show")->with('queries',$queries);
+        return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
 
     /**
@@ -95,7 +98,7 @@ class AdminQueryController extends Controller
         //->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')                
         ->join('sub_categories','queries.subCategory','=','sub_categories.id')
         ->where('queries.id','=', $id)
-        ->select('queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+        ->select('queries.queryType','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
         ->get();
     
         return view("adminQueryManager.show")->with('queries',$queries);
@@ -116,7 +119,12 @@ class AdminQueryController extends Controller
         $newQuery = new QueryAssignedToTechPersonel;
         $newQuery->queryId = $queryId;
         $newQuery->itPersonelId = $adminId;
+        //$newQuery->queryType = 2;
         $newQuery->save();
+
+        $updateQueryTypeId = Query::find($queryId);
+        $updateQueryTypeId->queryType = 2;
+        $updateQueryTypeId->save();
 
         return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
     }

@@ -8,7 +8,13 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
+          @if($querie->queryType == 1)
           <h2>Unassinged Query Viewer</h2>
+          @elseif($querie->queryType == 2)
+          <h2>Assinged Query Viewer</h2>
+          @else
+          <h2>Cleared Query Viewer</h2>
+          @endif
           <p>View Query Details </p>
         </div>
 
