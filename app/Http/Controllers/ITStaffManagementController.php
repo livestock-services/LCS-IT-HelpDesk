@@ -21,13 +21,14 @@ class ITStaffManagementController extends Controller
     public function showITStaffMember($staffMemberId){
 
         $staffMemberQueries = DB::table('admins')
-            ->join('','','=','')
-            ->join('','','=','')
-            ->where('','=','')
-            ->where('','=','')
-            ->select('','','','','')
+            ->join('query_assigned_to_tech_personels','admins.id','=','query_assigned_to_tech_personels.itPersonelId')
+            ->join('queries','query_assigned_to_tech_personels.queryId','=','queries.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('admins.id','=',$staffMemberId)
+            //->where('','=','')
+            ->select('admins.name as admin','users.name','queries.queryDetails','queries.subCategory')
             ->get();
-        //return $staffMemberDetails;
+        //return $staffMemberQueries;
 
         return view("iTStaffManagement.showItStaffMember")->with('staffMemberQueries', $staffMemberQueries);
     }

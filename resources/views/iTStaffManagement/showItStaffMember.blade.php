@@ -6,16 +6,16 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>User Queries</h2>
-                <p>All I.T Queries</p>
+                <h2>Pernsonnel Assinged Queries</h2>
+                <p>I.T Queries under Selected</p>
             </div>
 
             <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
 
-            @if(count($queries) > 0)
-                @foreach($queries as $query)
+            @if(count($staffMemberQueries) > 0)
+                @foreach($staffMemberQueries as $staffMemberQuerie)
                 <li>
-                <a href="{{ route('adminQueries.show',[$query->id]) }}"><div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}} <div style="float: right;">{{$query->name}}</div><i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div></a>
+                <div data-bs-toggle="collapse" class="collapsed question" >{{$staffMemberQuerie->queryDetails}} <div style="float: right;">{{$staffMemberQuerie->name}}</div><i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div></a>
                     <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                         
                         <!---<button type="button" class="btn btn-custom-primary">Button</button>--->

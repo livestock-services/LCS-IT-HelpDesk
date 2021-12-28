@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 @if(count($queries) > 0)
     @foreach($queries as $querie)
     <!-- ======= Contact Us Section ======= -->
@@ -76,7 +77,8 @@
     @endforeach
         
     @else
-        <p>Nothing Available</p>
+        <p>Something went wrong</p>
         
-    @endif<!-- End Contact Us Section -->  
-@endsection<!-- End Contact Us Section -->  
+    @endif
+
+@endsection

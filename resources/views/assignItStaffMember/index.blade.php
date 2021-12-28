@@ -17,12 +17,14 @@
             <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
             
               <li>
-                <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$iTStaff->name}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
-                <div id="faq1" class="collapse" data-bs-parent=".faq-list">
-                  <div class="button-box-az col-lg-12">
+                <div data-bs-toggle="" class="collapsed question" href="#faq1">{{$iTStaff->name}} 
+                  <div  style="float: right;">
                     <a href="{{ route('assignQuery.select',['query'=>$queryId,'adminId'=>$iTStaff->id]) }}" class="btn btn-success" role="button">Assign</a> 
                     <a href="{{ route('showITStaffMember.show',[$iTStaff->id]) }}" class="btn btn-info" role="button">View</a>                             
                   </div>
+                  <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                  
                 </div>
               </li>
             </ul>

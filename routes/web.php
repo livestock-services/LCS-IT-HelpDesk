@@ -86,6 +86,7 @@ Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(fun
     Route::get('viewAssingedQueries', 'AdminQueryController@indexAssingedQueries')->name('assingedQueriesAdmin.index');
     Route::get('viewClearedQueries', 'AdminQueryController@indexClearedQueries')->name('clearedQueriesAdmin.index');
     Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
+    Route::get('showClearedOrAssignedQueries/{id}', 'AdminQueryController@showClearedOrAssignedQueries')->name('adminQueries.showClearedOrAssignedQueries');
     Route::get('assingItQuery/{query}/{adminId}', 'AdminQueryController@assignQuery')->name('assignQuery.select');
 
     //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');

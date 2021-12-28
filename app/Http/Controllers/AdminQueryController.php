@@ -85,6 +85,21 @@ class AdminQueryController extends Controller
         //
     }
 
+    public function showClearedOrAssignedQueries($id){
+
+        $queries = DB::table('queries')
+            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('queries.id','=', $id )
+            ->select('users.email','users.name','queries.id','admins.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();
+        return $queries;
+
+        //return view("adminQueryManager.showClearedOrAssignedQueries")->with('queries',$queries);
+    }
+
     /**
      * Display the specified resource.
      *
