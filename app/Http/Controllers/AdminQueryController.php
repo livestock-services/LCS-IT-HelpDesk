@@ -36,15 +36,13 @@ class AdminQueryController extends Controller
 
     public function indexAssingedQueries()
     {
-        //$userId= auth()->user()->id;
-        //$queries = Query::find($userId);
         $queries = DB::table('queries')
                 ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
                 ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
                 ->join('sub_categories','queries.subCategory','=','sub_categories.id')
                 ->join('users','queries.userId','=','users.id')
                 ->where('queries.queryType','=', 2 )
-                ->select('users.email','users.name','queries.id','admins.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+                ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
                 ->get();
         return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
@@ -85,19 +83,19 @@ class AdminQueryController extends Controller
         //
     }
 
-    public function showClearedOrAssignedQueries($id){
+    public function showClearedOrAssignedQueries($queryId){
 
         $queries = DB::table('queries')
             ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
             ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
             ->join('users','queries.userId','=','users.id')
-            ->where('queries.id','=', $id )
-            ->select('users.email','users.name','queries.id','admins.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->where('queries.id','=', $queryId)
+            ->select('users.email','users.name','queries.queryType','queries.id','admins.name as adminName','admins.id as adminId','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
             ->get();
-        return $queries;
+        //return $queries;
 
-        //return view("adminQueryManager.showClearedOrAssignedQueries")->with('queries',$queries);
+        return view("adminQueryManager.showClearedOrAssignedQueries")->with('queries',$queries);
     }
 
     /**
