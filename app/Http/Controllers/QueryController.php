@@ -83,6 +83,7 @@ class QueryController extends Controller
         $query->subCategory = $request->input('subCategoryId');
         $query->userId = $userId;
         $query->save();
+        Controller::mail();
 
         return redirect('/home')->with('success','Category Created');
     }

@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class Controller extends BaseController
 {
@@ -38,5 +39,22 @@ class Controller extends BaseController
             ->count();
         return $checkQueryAssignment;
     }
+
+    public function mail()
+    {
+        $data = array('name'=>"Our Code World");
+        // Path or name to the blade template to be rendered
+        $template_path = 'email_template';
+
+        Mail::send(['text'=> $template_path ], $data, function($message) {
+            // Set the receiver and subject of the mail.
+            $message->to('azwels@livestock.co.zm', 'Receiver Name')->subject('Laravel First Mail');
+            // Set the sender
+            $message->from('sysmail@livestock.co.zm','Our Code World');
+        });
+
+        return "Basic email sent, check your inbox.";
+    }
+
 
 }
