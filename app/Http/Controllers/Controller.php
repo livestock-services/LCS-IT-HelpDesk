@@ -45,7 +45,7 @@ class Controller extends BaseController
         $data = array('name'=>"Our Code World");
         // Path or name to the blade template to be rendered
         $template_path = 'email_template';
-
+        
         Mail::send(['text'=> $template_path ], $data, function($message) {
             // Set the receiver and subject of the mail.
             $message->to('azwels@livestock.co.zm', 'Receiver Name')->subject('Laravel First Mail');
