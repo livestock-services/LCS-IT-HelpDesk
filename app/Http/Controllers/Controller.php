@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyMail;
 use App\Models\Category;
 use App\Models\QueryAssignedToTechPersonel;
 use App\Models\SubCategory;
@@ -56,5 +57,50 @@ class Controller extends BaseController
         return "Basic email sent, check your inbox.";
     }
 
+    public function notifyMail($categoryId, $subCategoryId, $queryDetails)
+    {    
+        $email= auth()->user()->email;
+        $categoryDetails = $this->getCategoryDetails($categoryId);
+        $subCategoryDetails = $this->getSubCategoryDetails($subCategoryId);
+        $data = array(
+            'categoryDetails' => $categoryDetails,
+            'subCategoryDetails' => $subCategoryDetails,
+            'queryDetails' =>  $queryDetails
+            //'message' => $request->message
+        );
+        //$emails = array("itsupport@livestock.co.zm", $email);
+        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyMail($data));
+
+        
+    
+        if (Mail::failures()) {
+            return 'FAILURE';
+        }else{
+            return view('home');
+        }
+    }
+
+    private function getCategoryDetails($categoryId){        
+        
+        $categoryDetails = DB::table('query_categories')
+            ->where('id','=',$categoryId)
+            ->select('categoryName')            
+            ->get();
+
+        $categoryDetails = $categoryDetails[0]->categoryName;
+        //print $categoryDetails;
+        return $categoryDetails;
+    }
+
+    private function getSubCategoryDetails($subCategoryId){        
+        
+        $subCategoryDetails = DB::table('sub_categories')
+            ->where('id','=',$subCategoryId)
+            ->select('subCategoryDescription')            
+            ->get();
+        $subCategoryDetails = $subCategoryDetails[0]->subCategoryDescription;
+        //print $subCategoryDetails;
+        return $subCategoryDetails;
+    }
 
 }

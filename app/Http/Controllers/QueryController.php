@@ -75,7 +75,8 @@ class QueryController extends Controller
             'categorieId' => 'required'
         ]);
 
-        Controller::mail();
+        //Controller::mail();
+        Controller::notifyMail($request->input('categorieId'),$request->input('subCategoryId'), $request->input('queryDetails'));
 
         $userId= auth()->user()->id;
 

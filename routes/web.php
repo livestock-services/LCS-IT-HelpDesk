@@ -96,6 +96,9 @@ Route::prefix('itStaffManagement')->namespace('App\Http\Controllers')->group(fun
     Route::get('showITStaffMember/{id}','ITStaffManagementController@showITStaffMember')->name('showITStaffMember.show');
 });
 
+use App\Http\Controllers\SendEmailController;
+
+Route::get('send-email', [SendEmailController::class, 'index']);
 
 
 
