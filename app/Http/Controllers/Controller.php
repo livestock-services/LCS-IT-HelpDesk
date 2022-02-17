@@ -69,9 +69,7 @@ class Controller extends BaseController
             //'message' => $request->message
         );
         //$emails = array("itsupport@livestock.co.zm", $email);
-        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyMail($data));
-
-        
+        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyMail($data)); 
     
         if (Mail::failures()) {
             return 'FAILURE';
@@ -79,6 +77,28 @@ class Controller extends BaseController
             return view('home');
         }
     }
+
+    public function notifyThatQueryTakenMail($categoryId, $subCategoryId, $queryDetails)
+    {    
+        $email= auth()->user()->email;
+        $categoryDetails = $this->getCategoryDetails($categoryId);
+        $subCategoryDetails = $this->getSubCategoryDetails($subCategoryId);
+        $data = array(
+            'categoryDetails' => $categoryDetails,
+            'subCategoryDetails' => $subCategoryDetails,
+            'queryDetails' =>  $queryDetails
+            //'message' => $request->message
+        );
+        //$emails = array("itsupport@livestock.co.zm", $email);
+        Mail::to('itsupport@livestock.co.zm')->cc('davidc@livestock.co.zm')->send(new NotifyMail($data));        
+    
+        if (Mail::failures()) {
+            return 'FAILURE';
+        }else{
+            return view('home');
+        }
+    }
+    
 
     private function getCategoryDetails($categoryId){        
         

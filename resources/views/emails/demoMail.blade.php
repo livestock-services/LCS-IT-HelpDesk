@@ -4,9 +4,9 @@
         <title>LSC HELP DESK</title>
     </head>
     <body>
-        <h1>Query : {{$data['categoryDetails']}}</h1>
-        <h2>{{$data['subCategoryDetails']}}</h2>
-        <h3>{{$data['queryDetails']}}</h3> 
-        <h3>From <b>{{ Auth::user()->name }}</b></h3>
+        <h3>Subject : {{$data['categoryDetails']}}</h3>
+        <h4>{{$data['subCategoryDetails']}}</h4>
+        <h5>{{$data['queryDetails']}}</h5> 
+        <h5>From: <b>{{ Auth::user()->name }} [{{Auth::user()->email}}]</b></h5>
     </body>
 </html> 
