@@ -74,12 +74,10 @@ class QueryController extends Controller
             'queryDetails' => 'required',
             'categorieId' => 'required'
         ]);
-
+        //Controller::notifyThatQueryAssingedMail($request->input('categorieId'),$request->input('subCategoryId'));
         //Controller::mail();
         Controller::notifyMail($request->input('categorieId'),$request->input('subCategoryId'), $request->input('queryDetails'));
-
         $userId= auth()->user()->id;
-
         $query = new  Query();
         $query->queryDetails = $request->input('queryDetails');
         $query->categoryId = $request->input('categorieId');

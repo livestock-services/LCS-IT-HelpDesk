@@ -97,6 +97,7 @@ Route::prefix('itStaffManagement')->namespace('App\Http\Controllers')->group(fun
 });
 
 use App\Http\Controllers\SendEmailController;
+use TCG\Voyager\Facades\Voyager;
 
 Route::get('send-email', [SendEmailController::class, 'index']);
 

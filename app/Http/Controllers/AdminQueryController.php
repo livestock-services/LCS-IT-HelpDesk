@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller as ControllersController;
 use App\Models\Query;
 use App\Models\QueryAssignedToTechPersonel;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 
 class AdminQueryController extends Controller
@@ -138,6 +140,13 @@ class AdminQueryController extends Controller
         $updateQueryTypeId = Query::find($queryId);
         $updateQueryTypeId->queryType = 2;
         $updateQueryTypeId->save();
+
+        $controller = new ControllersController();
+        $controller->notifyThatQueryAssingedMail($adminId,$queryId);
+        
+        //Controller::notifyThatQueryAssingedMail($adminId,$queryId);
+        //Controller::
+        //Controller::notifyThatQueryAssingedMail($adminId,$queryId);
 
         return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
     }
