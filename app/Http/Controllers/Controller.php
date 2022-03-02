@@ -21,24 +21,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    /*public function showSpecficCategory($id)
-    {
-        $categories = Category::find($id);
-        $subCategories = SubCategory::all();
-        $subCategories = DB::table('sub_categories')
-            ->where('categoryId','=',$id)
-            ->select('*')
-            ->orderBy('created_at','desc')
-            ->paginate(15);
-        return view('queryCategoryManagement.show')->with('categories',$categories)->with('subCategories',$subCategories);        
-    }*/
-
+    
     public function checkIfCategoryHasSubCategory($id){
 
     }
 
-    public function checkIfQuerieIsAssignedToItStaffMember($id){
-                
+    public function checkIfQuerieIsAssignedToItStaffMember($id){                
         $checkQueryAssignment = DB::table('query_assigned_to_tech_personels')
             ->where('queryId','=', $id)
             ->count();
@@ -73,10 +61,9 @@ class Controller extends BaseController
         $data = array(
             'categoryDetails' => $categoryDetails,
             'subCategoryDetails' => $subCategoryDetails,
-            'queryDetails' =>  $queryDetails
-            //'message' => $request->message
+            'queryDetails' =>  $queryDetails            
         );
-        //$emails = array("itsupport@livestock.co.zm", $email);
+        
         Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyMail($data)); 
     
         if (Mail::failures()) {
@@ -118,24 +105,23 @@ class Controller extends BaseController
         $adminEmail = $getAdminDetails->email;
         
         $getQueryDetails = $this->getQueryDetails($queryId);
-        $getQuerySenderUserId = $getQueryDetails->userId;
-
         $getQueryCategoryId = $getQueryDetails->categoryId;
+        
+        $getQuerySenderUserId = $getQueryDetails->userId;        
         $getQuerySubCategoryId = $getQueryDetails->subCategory;
 
         $getCategoryDetails = $this->getCategoryDetails($getQueryCategoryId);
-        $getSubCategoryDetails = $this->getSubCategoryDetails($getQuerySubCategoryId);
-        
         $categoryDetails = $getCategoryDetails->categoryName;
-        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;
+        
+        $getSubCategoryDetails = $this->getSubCategoryDetails($getQuerySubCategoryId);
+        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;        
 
         $getSenderDetails = $this->getUserDetails($getQuerySenderUserId);
         $querySenderEmail = $getSenderDetails->email;
         $querySenderName = $getSenderDetails->name;
 
         $email = $querySenderEmail;
-
-        //$email = $this->getUserDetails($queryId);
+        
         $data = array(
             'categoryDetails' => $categoryDetails,
             'subCategoryDetails' => $subCategoryDetails,
@@ -144,7 +130,7 @@ class Controller extends BaseController
             'adminEmail'=> $adminEmail,
             'adminName' => $adminName,            
         );
-        //$emails = array("itsupport@livestock.co.zm", $email);
+        
         Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyThatQueryAssingedMail($data));        
     
         if (Mail::failures()) {
