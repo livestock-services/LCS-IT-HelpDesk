@@ -42,7 +42,7 @@
                 <p style="color:blue;"><b>{{$querie->adminName}}</b></p>
               </div>
 
-              <a href=""><div class="phone">
+              <a href="{{ route('adminQueries.clearUserQuery',[$querie->id]) }}"><div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4 style="color:green;">Clear Query</h4>
                 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyClearedQuery;
 use App\Mail\NotifyMail;
 use App\Mail\NotifyThatQueryAssingedMail;
 use App\Models\Admin;
@@ -73,30 +74,41 @@ class Controller extends BaseController
         }
     }
 
-    private function getCategoryDetails($categoryId){       
-        $categoryDetails = Category::find($categoryId);        
-        return $categoryDetails;
-    }
+    public function notifyClearedQueryMail($queryId){
+                
+        $getQueryDetails = $this->getQueryDetails($queryId);
+        $getQueryCategoryId = $getQueryDetails->categoryId;
+        
+        $getQuerySenderUserId = $getQueryDetails->userId;        
+        $getQuerySubCategoryId = $getQueryDetails->subCategory;
 
-    private function getSubCategoryDetails($subCategoryId){
-        $subCategoryDetails = SubCategory::find($subCategoryId);
-        return $subCategoryDetails;
-    }
+        $getCategoryDetails = $this->getCategoryDetails($getQueryCategoryId);
+        $categoryDetails = $getCategoryDetails->categoryName;
+        
+        $getSubCategoryDetails = $this->getSubCategoryDetails($getQuerySubCategoryId);
+        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;        
 
-    public function getItPersonelDetails($adminId){
-        $iTPersonelDetails = Admin::find($adminId);
-        return $iTPersonelDetails;
-    }
+        $getSenderDetails = $this->getUserDetails($getQuerySenderUserId);
+        $querySenderEmail = $getSenderDetails->email;
+        $querySenderName = $getSenderDetails->name;
 
-    public function getUserDetails($userId){
-        $userDetails = User::find($userId);
-        return $userDetails;
-    }
+        $email = $querySenderEmail;
 
-    private function getQueryDetails($queryId){
-        $queryDetails = Query::find($queryId);
-        return $queryDetails;
-    }    
+        $data = array(
+            'categoryDetails' => $categoryDetails,
+            'subCategoryDetails' => $subCategoryDetails,
+            'querySenderName' => $querySenderName,
+            'querySenderEmail' => $querySenderEmail,                        
+        );
+
+        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyClearedQuery($data));        
+
+        if (Mail::failures()) {
+            return 'FAILURE';
+        }else{
+            return view('home');
+        }
+    }
 
     public function notifyThatQueryAssingedMail($adminId,$queryId)
     {           
@@ -138,6 +150,42 @@ class Controller extends BaseController
         }else{
             return view('home');
         }
-    }  
+    }    
+
+    private function getCategoryDetails($categoryId){       
+        $categoryDetails = Category::find($categoryId);        
+        return $categoryDetails;
+    }
+
+    private function getSubCategoryDetails($subCategoryId){
+        $subCategoryDetails = SubCategory::find($subCategoryId);
+        return $subCategoryDetails;
+    }
+    
+    
+
+    public function getItPersonelDetails($adminId){
+        $iTPersonelDetails = Admin::find($adminId);
+        return $iTPersonelDetails;
+    }
+
+    public function getUserDetails($userId){
+        $userDetails = User::find($userId);
+        return $userDetails;
+    }
+
+    public function getQueryDetails($queryId){
+        $queryDetails = Query::find($queryId);
+        return $queryDetails;
+    }
+    
+
+
+    public function getQueryAssignedToTechPersonelDetails($assignmentId){
+        $queryAssignedToTechPersonelDetails = QueryAssignedToTechPersonel::find($assignmentId);
+        return $queryAssignedToTechPersonelDetails;
+    }
+
+      
 
 }

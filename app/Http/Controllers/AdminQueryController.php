@@ -19,7 +19,7 @@ class AdminQueryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin');       
     }
 
     public function indexNewQueries()
@@ -36,7 +36,7 @@ class AdminQueryController extends Controller
         return view("adminQueryManager.index")->with('queries',$queries);
     }
 
-    public function indexAssingedQueries()
+    public function indexPendingQueries()
     {
         $queries = DB::table('queries')
                 ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
@@ -85,7 +85,7 @@ class AdminQueryController extends Controller
         //
     }
 
-    public function showClearedOrAssignedQueries($queryId){
+    public function showPendingQueries($queryId){
 
         $queries = DB::table('queries')
             ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
@@ -97,7 +97,7 @@ class AdminQueryController extends Controller
             ->get();
         //return $queries;
 
-        return view("adminQueryManager.showClearedOrAssignedQueries")->with('queries',$queries);
+        return view("adminQueryManager.showPendingQueries")->with('queries',$queries);
     }
 
     /**
@@ -133,21 +133,24 @@ class AdminQueryController extends Controller
     public function assignQuery($queryId, $adminId){
         $newQuery = new QueryAssignedToTechPersonel;
         $newQuery->queryId = $queryId;
-        $newQuery->itPersonelId = $adminId;
-        //$newQuery->queryType = 2;
+        $newQuery->itPersonelId = $adminId;       
         $newQuery->save();
-
-        $updateQueryTypeId = Query::find($queryId);
+        $controller = new ControllersController();        
+        $updateQueryTypeId = $controller->getQueryDetails($queryId);
         $updateQueryTypeId->queryType = 2;
-        $updateQueryTypeId->save();
-
-        $controller = new ControllersController();
+        $updateQueryTypeId->save();        
         $controller->notifyThatQueryAssingedMail($adminId,$queryId);
-        
-        //Controller::notifyThatQueryAssingedMail($adminId,$queryId);
-        //Controller::
-        //Controller::notifyThatQueryAssingedMail($adminId,$queryId);
+        return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
+    }
 
+    public function clearUserQuery($queryId){         
+        $controller = new ControllersController();        
+        $updateQueryTypeId = $controller->getQueryDetails($queryId);      
+        $updateQueryTypeId->queryType = 3;
+        $updateQueryTypeId->save();        
+        $controller->notifyClearedQueryMail($queryId);
+        
+        
         return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
     }
 

@@ -83,10 +83,11 @@ Route::prefix('assignITStaff')->namespace('App\Http\Controllers')->group(functio
 
 Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(function () {
     Route::get('viewNewQueries', 'AdminQueryController@indexNewQueries')->name('newQueriesAdmin.index');
-    Route::get('viewAssingedQueries', 'AdminQueryController@indexAssingedQueries')->name('assingedQueriesAdmin.index');
+    Route::get('viewAssingedQueries', 'AdminQueryController@indexPendingQueries')->name('yourPendingQueriesAdmin.index');
     Route::get('viewClearedQueries', 'AdminQueryController@indexClearedQueries')->name('clearedQueriesAdmin.index');
     Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
-    Route::get('showClearedOrAssignedQueries/{id}', 'AdminQueryController@showClearedOrAssignedQueries')->name('adminQueries.showClearedOrAssignedQueries');
+    Route::get('clearUserQuery/{query}', 'AdminQueryController@clearUserQuery')->name('adminQueries.clearUserQuery');
+    Route::get('showClearedOrAssignedQueries/{id}', 'AdminQueryController@showPendingQueries')->name('adminQueries.showPendingQueries');
     Route::get('assingItQuery/{query}/{adminId}', 'AdminQueryController@assignQuery')->name('assignQuery.select');
 
     //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');
