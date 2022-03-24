@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -26,6 +27,47 @@ class Controller extends BaseController
     public function checkIfCategoryHasSubCategory($id){
 
     }
+
+    public static function getUsersUnassignedQueries(){
+        
+    }
+
+    public static function getNewQueries(){
+        $queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('queries.queryType','=', 1 )
+            ->select('users.email','users.name','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->get();
+        return $queries;
+    }
+
+    public static function getAssignedQueries(){
+        $queries = DB::table('queries')
+            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('queries.queryType','=', 2 )                
+            ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();
+        return $queries;
+    }
+
+    public static function getAdminPendingQueries($adminId){        
+        $queries = DB::table('queries')
+                ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+                ->join('users','queries.userId','=','users.id')
+                ->where('queries.queryType','=', 2 )
+                ->where('admins.id','=',$adminId)
+                ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+                ->get();
+        return $queries;
+        //return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
+    } 
 
     public function checkIfQuerieIsAssignedToItStaffMember($id){                
         $checkQueryAssignment = DB::table('query_assigned_to_tech_personels')
@@ -74,26 +116,19 @@ class Controller extends BaseController
         }
     }
 
-    public function notifyClearedQueryMail($queryId){
-                
+    public function notifyClearedQueryMail($queryId){                
         $getQueryDetails = $this->getQueryDetails($queryId);
-        $getQueryCategoryId = $getQueryDetails->categoryId;
-        
+        $getQueryCategoryId = $getQueryDetails->categoryId;        
         $getQuerySenderUserId = $getQueryDetails->userId;        
         $getQuerySubCategoryId = $getQueryDetails->subCategory;
-
         $getCategoryDetails = $this->getCategoryDetails($getQueryCategoryId);
-        $categoryDetails = $getCategoryDetails->categoryName;
-        
+        $categoryDetails = $getCategoryDetails->categoryName;        
         $getSubCategoryDetails = $this->getSubCategoryDetails($getQuerySubCategoryId);
-        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;        
-
+        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;
         $getSenderDetails = $this->getUserDetails($getQuerySenderUserId);
         $querySenderEmail = $getSenderDetails->email;
         $querySenderName = $getSenderDetails->name;
-
         $email = $querySenderEmail;
-
         $data = array(
             'categoryDetails' => $categoryDetails,
             'subCategoryDetails' => $subCategoryDetails,
@@ -160,9 +195,7 @@ class Controller extends BaseController
     private function getSubCategoryDetails($subCategoryId){
         $subCategoryDetails = SubCategory::find($subCategoryId);
         return $subCategoryDetails;
-    }
-    
-    
+    }   
 
     public function getItPersonelDetails($adminId){
         $iTPersonelDetails = Admin::find($adminId);
@@ -178,14 +211,20 @@ class Controller extends BaseController
         $queryDetails = Query::find($queryId);
         return $queryDetails;
     }
-    
-
 
     public function getQueryAssignedToTechPersonelDetails($assignmentId){
         $queryAssignedToTechPersonelDetails = QueryAssignedToTechPersonel::find($assignmentId);
         return $queryAssignedToTechPersonelDetails;
     }
 
-      
-
+    public function getPendingQueries($userId){
+        $queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
+            ->where('userId','=',$userId)
+            ->where('queries.statusId','!=',3)
+            ->select('queries.statusId','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->get();
+        return $queries;
+    }
 }

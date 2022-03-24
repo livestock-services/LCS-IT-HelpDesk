@@ -8,7 +8,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Query Viewer</h2>
+          <h2>Query Viewers</h2>
           <p>View Query Details </p>
         </div>
 
@@ -19,17 +19,19 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Status:</h4>
-                @if($querie->statusId == 1)
-                <p>Pending</p>
+                @if($querie->statusId == 3)
+                <p style="color:green;"><b>Completed</b></p>                
+                @elseif($querie->statusId == 2)
+                <p style="color:blue;"><b>Assigned</b></p>
                 @else
-                <p>Completed</p>
+                <p style="color:red;"><b>Pending</b></p>
                 @endif
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Assinged To:</h4>
-                <p>Pending</p>
+                <p style="color:black;"><b>Unassigned</b></p>
               </div>
 
               <!--<a href=""><div class="phone">

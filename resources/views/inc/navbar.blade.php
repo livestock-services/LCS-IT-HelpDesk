@@ -21,7 +21,10 @@
             <ul>
               
               <li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>
-              <li><a href="{{route ('query.index')}}">View past I.T Query</a></li>
+              <li><a href="{{route ('query.indexPendingQueries')}}">Pending Queries</a></li>
+              <li><a href="{{route ('query.indexAssignedQueries')}}">Assinged Queries</a></li>
+              <li><a href="{{route ('query.indexClearedQueries')}}">Cleared Queries</a></li>
+
               
             </ul>
           </li>         

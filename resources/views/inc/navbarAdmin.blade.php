@@ -35,7 +35,7 @@
               </li>--->
               <!--<li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>--->
               <li><a href="{{route ('newQueriesAdmin.index')}}">New I.T Queries</a></li>
-              <li><a href="{{route ('newQueriesAdmin.index')}}">Assinged I.T Queries</a></li>
+              <li><a href="{{route ('assignedQueries.index')}}">Assinged I.T Queries</a></li>
               <li><a href="{{route ('yourPendingQueriesAdmin.index')}}">Your Pending I.T Queries</a></li>
               <li><a href="{{route ('clearedQueriesAdmin.index')}}">Cleared I.T Queries</a></li>
               <li><a href="">I.T Query Analytics</a></li>

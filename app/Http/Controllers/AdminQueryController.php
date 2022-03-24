@@ -22,41 +22,20 @@ class AdminQueryController extends Controller
     {
         $this->middleware('auth:admin');       
     }
-
-    public function indexNewQueries(){        
-        $queries = DB::table('queries')
-            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
-            ->join('users','queries.userId','=','users.id')
-            ->where('queries.queryType','=', 1 )
-            ->select('users.email','users.name','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
-            ->get();
-        return view("adminQueryManager.index")->with('queries',$queries);
+    
+    public function indexNewQueries(){   
+        $getNewQueries = ControllersController::getNewQueries();         
+        return view("adminQueryManager.index")->with('queries',$getNewQueries);
     }
 
-    public function indexAssignedQueries(){        
-        $queries = DB::table('queries')
-                ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
-                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
-                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-                ->join('users','queries.userId','=','users.id')
-                ->where('queries.queryType','=', 2 )                
-                ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
-                ->get();
+    public function indexAssignedQueries(){       
+        $queries = ControllersController::getAssignedQueries();        
         return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
 
     public function indexPendingQueries(){
         $adminId = Auth::id();
-        $queries = DB::table('queries')
-                ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
-                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
-                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-                ->join('users','queries.userId','=','users.id')
-                ->where('queries.queryType','=', 2 )
-                ->where('admins.id','=',$adminId)
-                ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
-                ->get();
+        $queries = ControllersController::getAdminPendingQueries($adminId);
         return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
 

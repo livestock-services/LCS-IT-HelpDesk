@@ -20,7 +20,55 @@ class QueryController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+
+    private function getUnclearedUserQueries($userId){
+        $queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
+            ->where('userId','=',$userId)
+            ->where('queries.statusId','!=',3)
+            ->select('queries.statusId','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->get();        
+        return $queries;
+    }
+
+    private function getAssignedUserQueries($userId){
+        $queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
+            ->where('userId','=',$userId)
+            ->where('queries.statusId','!=',3)
+            ->select('queries.statusId','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->get();        
+        return $queries;
+
+        $queries = DB::table('queries')
+            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('queries.queryType','=', 3 )
+            ->where('userId','=',$userId)
+            ->select('users.email','users.name','queries.id','admins.id','admins.name as adminName','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();
+        return $queries;
+    }
+
+    public function indexPendingQueries()
+    {
+        $userId= auth()->user()->id;
+        $queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('userId','=',$userId)
+            ->where('queries.statusId','=',1)
+            ->select('queries.statusId','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->get();
+        return view("query.indexPendingQueries")->with('queries',$queries);
+    }
+
+    public function indexClearedQueries()
     {
         $userId= auth()->user()->id;
         $queries = Query::find($userId);
@@ -28,7 +76,8 @@ class QueryController extends Controller
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
             ->join('query_categories','sub_categories.categoryId','=','query_categories.id')
             ->where('userId','=',$userId)
-            ->select('queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
+            ->where('queries.statusId','=',3)
+            ->select('queries.statusId','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
             ->get();
         return view("query.index")->with('queries',$queries);
     }
@@ -97,8 +146,7 @@ class QueryController extends Controller
      */
     public function show($id)
     {
-        $checkIfQueryIsAssinged = $this->checkIfQuerieIsAssignedToItStaffMember($id);
-        if($checkIfQueryIsAssinged > 0){
+        
             $queries = DB::table('queries')
                 ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
                 ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
@@ -107,15 +155,7 @@ class QueryController extends Controller
                 ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
                 ->get();
             return view("query.show")->with('queries',$queries);
-        }else{           
-            $queries = DB::table('queries')
-                //->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')                
-                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-                ->where('queries.id','=', $id)
-                ->select('queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
-                ->get();
-            return view("query.showUnAssinged")->with('queries',$queries);            
-        }       
+               
     }
 
     /**

@@ -31,7 +31,9 @@ Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
     Route::post('storeQuery', 'QueryController@store')->name('query.store');
     Route::post('showQuery', 'QueryController@showCategory')->name('query.show');
     Route::get('createQueryWithinCategory/{id}', 'QueryController@createQueryWithinCategory')->name('query.createQueryWithinCategory');
-    Route::get('indexQuery', 'QueryController@index')->name('query.index');
+    Route::get('indexPendingQuery', 'QueryController@indexPendingQueries')->name('query.indexPendingQueries');
+    Route::get('indexAssignedQuery', 'QueryController@indexAssignedQueries')->name('query.indexAssignedQueries');
+    Route::get('indexClearedQuery', 'QueryController@indexClearedQueries')->name('query.indexClearedQueries');
     Route::get('showQueryCategories','QueryController@showQueryCategories')->name('query.showQueryCategories');
     //Route::resource('categoryManagement','CategoryManagementController');
 });
@@ -83,6 +85,8 @@ Route::prefix('assignITStaff')->namespace('App\Http\Controllers')->group(functio
 
 Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(function () {
     Route::get('viewNewQueries', 'AdminQueryController@indexNewQueries')->name('newQueriesAdmin.index');
+    Route::get('viewAssignedQueries', 'AdminQueryController@indexAssignedQueries')->name('assignedQueries.index');
+
     Route::get('viewAssingedQueries', 'AdminQueryController@indexPendingQueries')->name('yourPendingQueriesAdmin.index');
     Route::get('viewClearedQueries', 'AdminQueryController@indexClearedQueries')->name('clearedQueriesAdmin.index');
     Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
