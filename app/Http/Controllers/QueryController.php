@@ -68,6 +68,16 @@ class QueryController extends Controller
         return view("query.indexPendingQueries")->with('queries',$queries);
     }
 
+    
+
+    public function indexAssignedorClearedQueries($statusId){
+        #print($statusId);
+        $userId= auth()->user()->id;
+
+        $queries = Controller::getAssignedorClearedQueries($statusId,$userId);
+        return view("query.indexAssignedorClearedQueries")->with('queries',$queries);
+    }
+
     public function indexClearedQueries()
     {
         $userId= auth()->user()->id;

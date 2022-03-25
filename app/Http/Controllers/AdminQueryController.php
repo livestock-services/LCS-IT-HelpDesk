@@ -119,6 +119,7 @@ class AdminQueryController extends Controller
         $controller = new ControllersController();        
         $updateQueryTypeId = $controller->getQueryDetails($queryId);
         $updateQueryTypeId->queryType = 2;
+        $updateQueryTypeId->statusId = 2;
         $updateQueryTypeId->save();        
         $controller->notifyThatQueryAssingedMail($adminId,$queryId);
         return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
@@ -128,6 +129,7 @@ class AdminQueryController extends Controller
         $controller = new ControllersController();        
         $updateQueryTypeId = $controller->getQueryDetails($queryId);      
         $updateQueryTypeId->queryType = 3;
+        $updateQueryTypeId->statusId = 2;
         $updateQueryTypeId->save();        
         $controller->notifyClearedQueryMail($queryId);
         

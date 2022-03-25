@@ -32,7 +32,7 @@ Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
     Route::post('showQuery', 'QueryController@showCategory')->name('query.show');
     Route::get('createQueryWithinCategory/{id}', 'QueryController@createQueryWithinCategory')->name('query.createQueryWithinCategory');
     Route::get('indexPendingQuery', 'QueryController@indexPendingQueries')->name('query.indexPendingQueries');
-    Route::get('indexAssignedQuery', 'QueryController@indexAssignedQueries')->name('query.indexAssignedQueries');
+    Route::get('indexAssignedorClearedQueries/{id}', 'QueryController@indexAssignedorClearedQueries')->name('query.indexAssignedorClearedQueries');
     Route::get('indexClearedQuery', 'QueryController@indexClearedQueries')->name('query.indexClearedQueries');
     Route::get('showQueryCategories','QueryController@showQueryCategories')->name('query.showQueryCategories');
     //Route::resource('categoryManagement','CategoryManagementController');
