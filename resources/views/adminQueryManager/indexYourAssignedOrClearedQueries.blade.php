@@ -13,10 +13,12 @@
             <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
 
             @if(count($queries) > 0)
-                @foreach($queries as $query)               
+                @foreach($queries as $query)
+               
                 <li>
-                <a href="{{ route('query.showAssignedorClearedQueries',[$query->id]) }}"><div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div></a>
-                    <div id="faq1" class="collapse" data-bs-parent=".faq-list">                       
+                <a href="{{ route('adminQueries.show',[$query->id]) }}"><div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div></a>
+                    <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                        
                         <!---<button type="button" class="btn btn-custom-primary">Button</button>--->
                     </div>
                 </li>

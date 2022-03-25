@@ -55,6 +55,20 @@ class Controller extends BaseController
         return $queries;
     }
 
+    public static function getAdminAssignedorClearedQueries($statusId,$adminId){
+        $queries = DB::table('queries')
+            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('queries.queryType','=', $statusId )
+            ->where('admins.id','=', $adminId )               
+            ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();
+        return $queries;
+    }
+    
+
     public static function getAssignedorClearedQueries($statusId,$userId){
         $queries = DB::table('queries')
             ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')

@@ -68,7 +68,22 @@ class QueryController extends Controller
         return view("query.indexPendingQueries")->with('queries',$queries);
     }
 
-    
+    public function showAssignedorClearedQueries($queryId){
+        $userId= auth()->user()->id;
+        $queries = DB::table('queries')
+            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('users','queries.userId','=','users.id')
+            ->where('queries.id','=', $queryId)
+            ->where('users.id','=', $userId)                
+            ->select('users.email','users.name','queries.queryType','queries.id','admins.name as adminName','admins.id as adminId','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();
+            
+       //print($queries);
+       return view("query.showAssignedOrClearedQueries")->with('queries',$queries);
+
+    }
 
     public function indexAssignedorClearedQueries($statusId){
         #print($statusId);

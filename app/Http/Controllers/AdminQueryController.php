@@ -28,6 +28,13 @@ class AdminQueryController extends Controller
         return view("adminQueryManager.index")->with('queries',$getNewQueries);
     }
 
+    public function indexYourAssignedOrClearedQueries($statusId){
+        $adminId = Auth::id();        
+        $queries = ControllersController::getAdminAssignedorClearedQueries($statusId,$adminId);        
+        return view("adminQueryManager.indexYourAssignedOrClearedQueries")->with('queries',$queries);
+
+    }
+   
     public function indexAssignedQueries(){       
         $queries = ControllersController::getAssignedQueries();        
         return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);

@@ -35,11 +35,17 @@
               </li>--->
               <!--<li><a href="{{route ('query.showQueryCategories')}}">Send an I.T Query</a></li>--->
               <li><a href="{{route ('newQueriesAdmin.index')}}">New I.T Queries</a></li>
-              <li><a href="{{route ('assignedQueries.index')}}">Assinged I.T Queries</a></li>
-              <li><a href="{{route ('yourPendingQueriesAdmin.index')}}">Your Pending I.T Queries</a></li>
-              <li><a href="{{route ('clearedQueriesAdmin.index')}}">Cleared I.T Queries</a></li>
+              <li><a href="{{route ('assignedQueries.index')}}">Assinged I.T Queries</a></li>              
+              <li><a href="{{route ('clearedQueriesAdmin.index')}}">All Cleared I.T Queries</a></li>
               <li><a href="">I.T Query Analytics</a></li>
               
+            </ul>
+          </li>
+
+          <li class="dropdown"><a href="#"><span>Your Queries</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',2)}}">Pending I.T Queries</a></li>
+              <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',3)}}">Cleared I.T Queries</a></li>
             </ul>
           </li>
 
