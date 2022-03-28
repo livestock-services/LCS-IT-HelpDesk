@@ -136,7 +136,7 @@ class AdminQueryController extends Controller
         $controller = new ControllersController();        
         $updateQueryTypeId = $controller->getQueryDetails($queryId);      
         $updateQueryTypeId->queryType = 3;
-        $updateQueryTypeId->statusId = 2;
+        $updateQueryTypeId->statusId = 3;
         $updateQueryTypeId->save();        
         $controller->notifyClearedQueryMail($queryId);
         
