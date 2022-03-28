@@ -43,7 +43,7 @@ class LoginController extends Controller
             'email'=>$request->email,   
             'password'=>$request->password   
         ], $request->remember)){            
-            return redirect('admin/adminDashboard')->with('success', 'Welcome');   
+            return redirect('adminUser/adminDashboard')->with('success', 'Welcome');   
         }
    
         return redirect()->back()->withInput($request->only('email', 'remember'));

@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/users', [UserController::class, 'users']);
   });
 
-Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function () {
+Route::prefix('adminUser')->namespace('App\Http\Controllers\Admin')->group(function () {
     //Login Routes
     /*Route::group(['middleware' => 'guest'], function () {
         Route::get('/login', 'Auth\AdminLoginController@showAdminLoginForm')->name('admin.login');
@@ -144,6 +144,6 @@ Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->group(function 
     });
 });
 
-Route::group(['prefix' => 'adminControl'], function () {
+/*Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
-});
+});*/
