@@ -68,6 +68,11 @@ Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(func
     //Route::resource('categoryManagement','CategoryManagementController');
 });
 
+Route::prefix('userRoleManagement')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('create', 'UserRolesController@create')->name('userRole.create');
+    Route::post('store','UserRolesController@store')->name('userRole.store');
+});
+
 Route::view('states-city','livewire.home');
 
 Route::resources([    
@@ -143,6 +148,8 @@ Route::prefix('adminUser')->namespace('App\Http\Controllers\Admin')->group(funct
     
     });
 });
+
+
 
 /*Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

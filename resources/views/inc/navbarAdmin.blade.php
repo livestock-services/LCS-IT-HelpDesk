@@ -47,25 +47,33 @@
               <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',2)}}">Pending I.T Queries</a></li>
               <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',3)}}">Cleared I.T Queries</a></li>
             </ul>
-          </li>
-
-          <li class="dropdown"><a href="#"><span>Query Mangament</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <!---<li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+          </li>          
+          <li class="dropdown"><a href="#"><span>User Management</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>              
+              <li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="{{route ('query.create')}}">Send an I.T Query</a></li>
-                  <li><a href="#">View past I.T Query</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="{{route ('userRole.create')}}">Create Role</a></li>
+                  <li><a href="#">View Roles</a></li>                  
                 </ul>
-              </li>--->
+              </li>
+              <li class="dropdown"><a href="#"><span>Staff</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Add User</a></li>              
+                  <li><a href="#">View Staff Users</a></li>                  
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>Admin</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Add Admins</a></li>
+                  <li><a href="#">View Admins</a></li>
+                </ul>
+              </li>              
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Query Management</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>              
               <li><a href="{{route ('category.create')}}">Create Query Category</a></li>
-              <li><a href="{{route ('category.index')}}">View Query Categories</a></li>
-              <!--<li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>--->
+              <li><a href="{{route ('category.index')}}">View Query Categories</a></li>              
             </ul>
           </li>
           
