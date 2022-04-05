@@ -71,6 +71,7 @@ Route::prefix('subQueryManagent')->namespace('App\Http\Controllers')->group(func
 Route::prefix('userRoleManagement')->namespace('App\Http\Controllers')->group(function () {
     Route::get('create', 'UserRolesController@create')->name('userRole.create');
     Route::post('store','UserRolesController@store')->name('userRole.store');
+    Route::get('index','UserRolesController@index')->name('userRole.index');
 });
 
 Route::view('states-city','livewire.home');

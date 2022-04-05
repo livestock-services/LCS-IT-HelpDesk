@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserRolesController extends Controller
 {
@@ -13,7 +14,8 @@ class UserRolesController extends Controller
      */
     public function index()
     {
-        
+        $allRoles = Role::all();
+        return view('userRoleManagement.index')->with('allRoles',$allRoles );        
     }
 
     /**
@@ -34,7 +36,13 @@ class UserRolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'roleName' => 'required',            
+        ]);
+
+        $roleName = $request->input('roleName');       
+        Role::create(['guard_name' => 'admin', 'name' => $roleName]);
+        return redirect('/userRoleManagement/index')->with('success','Role Created');
     }
 
     /**

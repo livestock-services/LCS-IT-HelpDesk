@@ -53,7 +53,7 @@
               <li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{route ('userRole.create')}}">Create Role</a></li>
-                  <li><a href="#">View Roles</a></li>                  
+                  <li><a href="{{route ('userRole.index')}}">View Roles</a></li>                  
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Staff</span> <i class="bi bi-chevron-right"></i></a>
