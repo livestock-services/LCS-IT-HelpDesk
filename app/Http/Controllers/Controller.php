@@ -43,6 +43,13 @@ class Controller extends BaseController
         return $queries;
     }
 
+    public function hasPasswordBeenChanged()
+    {   
+        if ((Auth::user()->changed_password == null)) {
+           return redirect(route('change-password'));
+        }        
+    }
+
     public static function getAssignedQueries(){
         $queries = DB::table('queries')
             ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')

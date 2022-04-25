@@ -58,8 +58,8 @@
               </li>
               <li class="dropdown"><a href="#"><span>Staff</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Add User</a></li>              
-                  <li><a href="#">View Staff Users</a></li>                  
+                  <li><a href="{{ route('register') }}">Add User</a></li>              
+                  <li><a href="{{ route('userManagement.index')}}">View Staff Users</a></li>                  
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>Admin</span> <i class="bi bi-chevron-right"></i></a>

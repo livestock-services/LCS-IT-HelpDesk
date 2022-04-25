@@ -65,7 +65,7 @@
                         <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                         
                         </div>
-                    </li
+                    </li>
                     @endif
 
                     

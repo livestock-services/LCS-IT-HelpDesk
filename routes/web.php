@@ -74,6 +74,17 @@ Route::prefix('userRoleManagement')->namespace('App\Http\Controllers')->group(fu
     Route::get('index','UserRolesController@index')->name('userRole.index');
 });
 
+Route::prefix('userManagement')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('create', 'UserManagementController@create')->name('userManagement.create');
+    Route::post('store','UserManagementController@store')->name('userManagement.store');
+    Route::get('index','UserManagementController@index')->name('userManagement.index');
+    Route::get('show/{id}', 'UserManagementController@show')->name('userManagement.show');
+    Route::get('edit/{id}', 'UserManagementController@edit')->name('userManagement.edit');
+    Route::get('resetUserPassword/{id}', 'UserManagementController@resetUserPassword')->name('userManagement.resetPassword');
+
+
+});
+
 Route::view('states-city','livewire.home');
 
 Route::resources([    
@@ -141,6 +152,7 @@ Route::prefix('adminUser')->namespace('App\Http\Controllers\Admin')->group(funct
     
         //Forgot Password Routes
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
+        Route::post('/password/resetsubmit','ForgotPasswordController@showLinkRequestForm')->name('reset.password.submit');
         Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     
         //Reset Password Routes
