@@ -81,8 +81,21 @@ Route::prefix('userManagement')->namespace('App\Http\Controllers')->group(functi
     Route::get('show/{id}', 'UserManagementController@show')->name('userManagement.show');
     Route::get('edit/{id}', 'UserManagementController@edit')->name('userManagement.edit');
     Route::get('resetUserPassword/{id}', 'UserManagementController@resetUserPassword')->name('userManagement.resetPassword');
+    Route::post('updateUser/{id}', 'UserManagementController@update')->name('userManagement.updateUserCredentials');
+    Route::post('updateUserPassword/{id}', 'UserManagementController@updatePassword')->name('userManagement.updateUserPassword');
+});
 
-
+Route::prefix('adminManagement')->namespace('App\Http\Controllers')->group(function () {
+    Route::get('create', 'AdminManagementController@create')->name('adminManagement.create');
+    Route::get('register', 'AdminManagementController@register')->name('adminManagement.register');
+    Route::post('registerAdmin', 'AdminManagementController@registerAdmin')->name('adminManagement.registerAdmin');
+    Route::post('store','AdminManagementController@store')->name('adminManagement.store');
+    Route::get('index','AdminManagementController@index')->name('adminManagement.index');
+    Route::get('show/{id}', 'AdminManagementController@show')->name('adminManagement.show');
+    Route::get('edit/{id}', 'AdminManagementController@edit')->name('adminManagement.edit');
+    Route::get('resetUserPassword/{id}', 'AdminManagementController@resetUserPassword')->name('adminManagement.resetPassword');
+    Route::post('updateUser/{id}', 'AdminManagementController@update')->name('adminManagement.updateUserCredentials');
+    Route::post('updateUserPassword/{id}', 'AdminManagementController@updatePassword')->name('adminManagement.updateUserPassword');
 });
 
 Route::view('states-city','livewire.home');

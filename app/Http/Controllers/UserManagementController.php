@@ -92,7 +92,33 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'manNumber' => 'required',
+            'email' => 'required|email|max:255'
+        ]);
+        
+        $updateUserDetails = User::find($id);
+        $updateUserDetails->name = $request->input('name');
+        $updateUserDetails->manNumber = $request->input('manNumber');
+        $updateUserDetails->email = $request->input('email');
+        $updateUserDetails->save();
+        
+        return redirect()->back();
+    }
+
+    public function updatePassword(Request $request, $id){
+
+        $this->validate($request, [
+            'password' => 'required|min:6|confirmed'
+        ]);   
+        
+        $updateUserDetails = User::find($id);
+        $updateUserDetails->password = bcrypt($request->input('password'));
+        $updateUserDetails->changed_password = True;
+        $updateUserDetails->save();
+
+        return redirect()->back();
     }
 
     /**

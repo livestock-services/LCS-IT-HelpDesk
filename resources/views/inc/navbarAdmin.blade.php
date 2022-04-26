@@ -64,8 +64,8 @@
               </li>
               <li class="dropdown"><a href="#"><span>Admin</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Add Admins</a></li>
-                  <li><a href="#">View Admins</a></li>
+                  <li><a href="{{ route('adminManagement.register') }}">Add Admins</a></li>
+                  <li><a href="{{ route('adminManagement.index') }}">View Admins</a></li>
                 </ul>
               </li>              
             </ul>

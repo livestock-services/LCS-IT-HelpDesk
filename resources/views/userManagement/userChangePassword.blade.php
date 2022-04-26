@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="2">
-        <form action="{{ route('register') }}" method="post" role="form" class="php-email-form">
+        <form action="{{ route('userManagement.updateUserPassword',[$userDetails->id]) }}" method="post" role="form" class="php-email-form">
         @csrf
             <div class="row justify-content-center">
                 <div class="form-group col-md-6">
