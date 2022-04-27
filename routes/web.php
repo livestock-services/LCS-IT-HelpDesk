@@ -93,7 +93,7 @@ Route::prefix('adminManagement')->namespace('App\Http\Controllers')->group(funct
     Route::get('index','AdminManagementController@index')->name('adminManagement.index');
     Route::get('show/{id}', 'AdminManagementController@show')->name('adminManagement.show');
     Route::get('edit/{id}', 'AdminManagementController@edit')->name('adminManagement.edit');
-    Route::get('resetUserPassword/{id}', 'AdminManagementController@resetUserPassword')->name('adminManagement.resetPassword');
+    Route::get('resetUserPassword/{id}', 'AdminManagementController@resetAdminPassword')->name('adminManagement.resetPassword');
     Route::post('updateUser/{id}', 'AdminManagementController@update')->name('adminManagement.updateUserCredentials');
     Route::post('updateUserPassword/{id}', 'AdminManagementController@updatePassword')->name('adminManagement.updateUserPassword');
 });

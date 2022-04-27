@@ -6,7 +6,7 @@
       <div class="container" data-aos="fade-up">
         <div class="section-title">
           <h2>Admin Details</h2>
-          <p>{{$userDetails->name}}</p>
+          <p>{{$adminDetails->name}}</p>
         </div>
 
         <div class="row">
@@ -14,30 +14,30 @@
             <div class="info">
               <div class="address">
                 <i class="bi bi-person-badge"></i>
-                <h4>Man Number :<h4 style="color: #eb5d1e;">{{$userDetails->manNumber}}</h4>
+                <h4>Man Number :<h4 style="color: #eb5d1e;">{{$adminDetails->manNumber}}</h4>
                 <p>Livestock Services employee number</p>
               </div>
               
               
               <div class="email">
                 <i class="bi bi-envelope"></i>
-                <h4>Email :<h4 style="color: #eb5d1e;">{{$userDetails->email}}</h4></h4>
+                <h4>Email :<h4 style="color: #eb5d1e;">{{$adminDetails->email}}</h4></h4>
                 <p>Livestock Services email address</p>
               </div>
               
-              <a href="{{ route('userManagement.edit',[$userDetails->id]) }}"><div class="phone">
+              <a href="{{ route('adminManagement.edit',[$adminDetails->id]) }}"><div class="phone">
                 <i class="bi bi-laptop"></i>
                 <h4>Edit User</h4>
                 <p>Edit User Account</p>
               </div></a>
 
-              <a href="{{ route('userManagement.resetPassword',[$userDetails->id]) }}"><div class="phone">
+              <a href="{{ route('adminManagement.resetPassword',[$adminDetails->id]) }}"><div class="phone">
                 <i class="bi bi-key"></i>
                 <h4>Reset Password</h4>
                 <p>Reset User Password</p>
               </div></a>
 
-              <a href="{{ route('userManagement.resetPassword',[$userDetails->id]) }}"><div class="phone">
+              <a href="{{ route('adminManagement.resetPassword',[$adminDetails->id]) }}"><div class="phone">
                 <i class="bi bi-dash-circle"></i>
                 <h4>Deactivate Account</h4>
                 <p>Deactivate User Account</p>

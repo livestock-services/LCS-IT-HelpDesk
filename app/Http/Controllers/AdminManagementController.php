@@ -71,11 +71,11 @@ class AdminManagementController extends Controller
      */
     public function show($id)
     {
-        $userDetails = Admin::find($id);        
+        $adminDetails = Admin::find($id);        
         $userAssignedQueries = Controller::getAdminAssignedorClearedQueries(2,$id);
         $countUserAssignedQueries = count($userAssignedQueries);     
                 
-        return view('adminManagement.show')->with('userAssignedQueries', $userAssignedQueries)->with('userDetails',$userDetails)->with('userAssignedQueries', $userAssignedQueries)->with('countUserAssignedQueries',$countUserAssignedQueries);
+        return view('adminManagement.show')->with('userAssignedQueries', $userAssignedQueries)->with('adminDetails',$adminDetails)->with('userAssignedQueries', $userAssignedQueries)->with('countUserAssignedQueries',$countUserAssignedQueries);
     }
 
     /**
@@ -86,7 +86,14 @@ class AdminManagementController extends Controller
      */
     public function edit($id)
     {
-        //
+        $adminDetails = Admin::find($id);
+        return view('adminManagement.edit')->with('adminDetails',$adminDetails);
+    }
+
+    public function resetAdminPassword($id){
+        $adminDetails = Admin::find($id);
+        //print($adminDetails);
+        return view('adminManagement.adminChangePassword')->with('adminDetails',$adminDetails);
     }
 
     /**
@@ -98,7 +105,33 @@ class AdminManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'manNumber' => 'required',
+            'email' => 'required|email|max:255'
+        ]);
+        
+        $updateAdminDetails = Admin::find($id);
+        $updateAdminDetails->name = $request->input('name');
+        $updateAdminDetails->manNumber = $request->input('manNumber');
+        $updateAdminDetails->email = $request->input('email');
+        $updateAdminDetails->save();
+        
+        return redirect()->back();
+    }
+
+    public function updatePassword(Request $request, $id){
+
+        $this->validate($request, [
+            'password' => 'required|min:6|confirmed'
+        ]);   
+        
+        $updateAdminDetails = Admin::find($id);
+        $updateAdminDetails->password = bcrypt($request->input('password'));
+        $updateAdminDetails->changed_password = True;
+        $updateAdminDetails->save();
+
+        return redirect()->back();
     }
 
     /**
