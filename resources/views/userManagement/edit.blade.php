@@ -33,7 +33,7 @@
             <div class="row justify-content-center">
                 <div class="form-group col-md-6">
                 <h5><label for="manNumber" class="form-label">{{ __('Man Number') }}</label></h5>
-                <input id="manNumber" type="text" class="form-control @error('manNumber') is-invalid @enderror" name="manNumber" value="{{$userDetails->manNumber}}" required autocomplete="name" autofocus>
+                <input style="text-transform:uppercase" id="manNumber" type="text" class="form-control @error('manNumber') is-invalid @enderror" name="manNumber" value="{{$userDetails->manNumber}}" required autocomplete="name" autofocus>
 
                     <div class="col-md-6">
 

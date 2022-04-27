@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminManagementController extends Controller
 {
@@ -13,7 +15,8 @@ class AdminManagementController extends Controller
      */
     public function index()
     {
-        //
+        $adminUsers = Admin::all();
+        return view("adminManagement.index")->with('adminUsers', $adminUsers);
     }
 
     /**
@@ -31,6 +34,21 @@ class AdminManagementController extends Controller
     }
 
     public function registerAdmin(Request $request){
+
+        $this->validate($request, [
+            'name' => 'required',
+            'manNumber' => 'required',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+        $adminUser = new Admin();
+        $adminUser->name = $request->input('name');
+        $adminUser->email= $request->input('email');
+        $adminUser->manNumber = $request->input('manNumber');
+        $adminUser->password = bcrypt($request->input('password'));
+        $adminUser->save();        
+        
         return redirect()->back();
     }
 
@@ -53,7 +71,11 @@ class AdminManagementController extends Controller
      */
     public function show($id)
     {
-        //
+        $userDetails = Admin::find($id);        
+        $userAssignedQueries = Controller::getAdminAssignedorClearedQueries(2,$id);
+        $countUserAssignedQueries = count($userAssignedQueries);     
+                
+        return view('adminManagement.show')->with('userAssignedQueries', $userAssignedQueries)->with('userDetails',$userDetails)->with('userAssignedQueries', $userAssignedQueries)->with('countUserAssignedQueries',$countUserAssignedQueries);
     }
 
     /**
