@@ -100,7 +100,7 @@ class UserManagementController extends Controller
         
         $updateUserDetails = User::find($id);
         $updateUserDetails->name = $request->input('name');
-        $updateUserDetails->manNumber = $request->input('manNumber');
+        $updateUserDetails->manNumber = strtoupper($request->input('manNumber'));
         $updateUserDetails->email = $request->input('email');
         $updateUserDetails->save();
         
