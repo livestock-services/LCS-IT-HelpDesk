@@ -43,7 +43,7 @@ class AdminManagementController extends Controller
         $adminUser = new Admin();
         $adminUser->name = $request->input('name');
         $adminUser->email= $request->input('email');
-        $adminUser->manNumber = $request->input('manNumber');
+        $adminUser->manNumber = strtoupper($request->input('manNumber'));
         $adminUser->password = bcrypt($request->input('password'));
         $adminUser->save();       
         $userId  = Controller::getUserIdFromManNumber($request->input('manNumber')); 
@@ -139,7 +139,7 @@ class AdminManagementController extends Controller
         ]);        
         $updateAdminDetails = Admin::find($id);
         $updateAdminDetails->name = $request->input('name');
-        $updateAdminDetails->manNumber = $request->input('manNumber');
+        $updateAdminDetails->manNumber = strtoupper($request->input('manNumber'));
         $updateAdminDetails->email = $request->input('email');
         $updateAdminDetails->save();
         $this->deleteUserRole($id);
