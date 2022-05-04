@@ -32,6 +32,21 @@
             </div>
             <div class="row justify-content-center">
                 <div class="form-group col-md-6">
+                <h5><label for="name" class="form-label">{{ __('User Role') }}</label></h5>
+                    <select name= "userRole" class="form-control">                    
+                    @foreach ($roles as $role) 
+                        @if ($usersRole == $role->name)
+                        <b><option class="font-weight-bold" value="{{$role->name}}" selected>{{ $role->name }}</option></b>
+                        @else
+                        <b><option class="font-weight-bold" value="{{$role->name}}">{{ $role->name }}</option></b>
+                        @endif                       
+                        
+                    @endforeach 
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-group col-md-6">
                 <h5><label for="manNumber" class="form-label">{{ __('Man Number') }}</label></h5>
                 <input style="text-transform:uppercase" id="manNumber" type="text" class="form-control @error('manNumber') is-invalid @enderror" name="manNumber" value="{{$adminDetails->manNumber}}" required autocomplete="name" autofocus>
 

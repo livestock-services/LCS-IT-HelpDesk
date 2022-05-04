@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Query;
 use App\Models\QueryAssignedToTechPersonel;
+use App\Models\Roles;
 use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -41,6 +42,15 @@ class Controller extends BaseController
             ->select('users.email','users.name','queries.id','queries.priorityCode','queries.queryDetails','query_categories.categoryName','query_categories.categoryDescription','sub_categories.subCategoryDescription')
             ->get();
         return $queries;
+    }
+
+    public function getUserIdFromManNumber($manNumber){
+        $getUserId = DB::table('admins')
+            ->where('manNumber','=',$manNumber)
+            ->select('id')
+            ->get();
+        $userId = $getUserId[0]->id;
+        return $userId;
     }
 
     public function hasPasswordBeenChanged()
@@ -112,17 +122,12 @@ class Controller extends BaseController
 
     public function mail()
     {
-        $data = array('name'=>"Our Code World");
-        // Path or name to the blade template to be rendered
-        $template_path = 'email_template';
-        
+        $data = array('name'=>"Our Code World");        
+        $template_path = 'email_template';        
         Mail::send(['text'=> $template_path ], $data, function($message) {
-            // Set the receiver and subject of the mail.
             $message->to('azwels@livestock.co.zm', 'Receiver Name')->subject('Laravel First Mail');
-            // Set the sender
             $message->from('sysmail@livestock.co.zm','Our Code World');
         });
-
         return "Basic email sent, check your inbox.";
     }
 
@@ -130,19 +135,15 @@ class Controller extends BaseController
     {    
         $email= auth()->user()->email;
         $getCategoryDetails = $this->getCategoryDetails($categoryId);
-        $getSubCategoryDetails = $this->getSubCategoryDetails($subCategoryId);
-        
+        $getSubCategoryDetails = $this->getSubCategoryDetails($subCategoryId);        
         $categoryDetails = $getCategoryDetails->categoryName;
         $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;
-
         $data = array(
             'categoryDetails' => $categoryDetails,
             'subCategoryDetails' => $subCategoryDetails,
             'queryDetails' =>  $queryDetails            
-        );
-        
-        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyMail($data)); 
-    
+        );        
+        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyMail($data));    
         if (Mail::failures()) {
             return 'FAILURE';
         }else{
@@ -169,9 +170,7 @@ class Controller extends BaseController
             'querySenderName' => $querySenderName,
             'querySenderEmail' => $querySenderEmail,                        
         );
-
-        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyClearedQuery($data));        
-
+        Mail::to('itsupport@livestock.co.zm')->cc($email)->send(new NotifyClearedQuery($data));
         if (Mail::failures()) {
             return 'FAILURE';
         }else{
@@ -183,24 +182,18 @@ class Controller extends BaseController
     {           
         $getAdminDetails = $this->getItPersonelDetails($adminId);        
         $adminName = $getAdminDetails->name;
-        $adminEmail = $getAdminDetails->email;
-        
+        $adminEmail = $getAdminDetails->email;        
         $getQueryDetails = $this->getQueryDetails($queryId);
-        $getQueryCategoryId = $getQueryDetails->categoryId;
-        
+        $getQueryCategoryId = $getQueryDetails->categoryId;        
         $getQuerySenderUserId = $getQueryDetails->userId;        
         $getQuerySubCategoryId = $getQueryDetails->subCategory;
-
         $getCategoryDetails = $this->getCategoryDetails($getQueryCategoryId);
-        $categoryDetails = $getCategoryDetails->categoryName;
-        
+        $categoryDetails = $getCategoryDetails->categoryName;        
         $getSubCategoryDetails = $this->getSubCategoryDetails($getQuerySubCategoryId);
-        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;        
-
+        $subCategoryDetails = $getSubCategoryDetails->subCategoryDescription;
         $getSenderDetails = $this->getUserDetails($getQuerySenderUserId);
         $querySenderEmail = $getSenderDetails->email;
         $querySenderName = $getSenderDetails->name;
-
         $email = $querySenderEmail;
         
         $data = array(
@@ -249,6 +242,11 @@ class Controller extends BaseController
     public function getQueryAssignedToTechPersonelDetails($assignmentId){
         $queryAssignedToTechPersonelDetails = QueryAssignedToTechPersonel::find($assignmentId);
         return $queryAssignedToTechPersonelDetails;
+    }
+
+    public function getAllRoles(){
+        $allRoles = Roles::all();
+        return $allRoles;
     }
 
     public function getPendingQueries($userId){
