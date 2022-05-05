@@ -51,7 +51,7 @@
         @include('inc.navbar')
         @if(Auth::guard('web')->check())
           @include('inc.navbar')  
-        @elseif(Auth::guard('admin'))
+        @elseif(Auth::guard('admin')->check())
           @include('inc.navbarAdmin')
         @else
           @include('inc.navbar')
