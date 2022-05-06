@@ -8,7 +8,7 @@
 
     <div class="section-title">
         <h2>Login into your account to proceed</h2>
-        <p>Login</p>
+        <p>Admin Login</p>
     </div>
 
     <div class="row">

@@ -16,7 +16,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="{{ url('/home') }}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{{route ('quick.index')}}">Quick Bar</a></li>
+          <!---<li><a class="nav-link scrollto" href="{{route ('quick.index')}}">Quick Bar</a></li>--->
           <li class="dropdown"><a href="#"><span>I.T Queries</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               
@@ -35,9 +35,7 @@
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
                 @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
+                    
                 @endif
             @else
                 <li class="nav-item dropdown">

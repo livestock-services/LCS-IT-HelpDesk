@@ -23,7 +23,7 @@
                 @endforeach
             @else
             <li>
-                <div data-bs-toggle="" class="collapsed question" >No User queries have been made<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                <div data-bs-toggle="" class="collapsed question" >No User queries<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
                 <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                 
                 </div>

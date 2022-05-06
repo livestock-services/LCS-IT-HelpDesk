@@ -10,7 +10,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a href="{{ url('/home') }}"><span>IT Help Desk</span></a></h1>
+        <h1 class="text-light"><a href="{{ url('admin.home') }}"><span>IT Help Desk</span></a></h1>
 
         <!---<a class="navbar-brand" href="{{ url('/home') }}">
                 {{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
@@ -21,8 +21,8 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="{{ url('/home') }}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{{route ('quick.index')}}">Quick Bar</a></li>
+          <li><a class="nav-link scrollto active" href="{{ route('admin.home') }}">Home</a></li>
+          <!---<li><a class="nav-link scrollto" href="{{route ('quick.index')}}">Quick Bar</a></li>--->
           <li class="dropdown"><a href="#"><span>I.T Queries</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <!---<li><a href="#">Drop Down 1</a></li>
@@ -37,7 +37,7 @@
               <li><a href="{{route ('newQueriesAdmin.index')}}">New I.T Queries</a></li>
               <li><a href="{{route ('assignedQueries.index')}}">Assinged I.T Queries</a></li>              
               <li><a href="{{route ('clearedQueriesAdmin.index')}}">All Cleared I.T Queries</a></li>
-              <li><a href="">I.T Query Analytics</a></li>
+              <!---<li><a href="">I.T Query Analytics</a></li>--->
               
             </ul>
           </li>
@@ -104,9 +104,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
+                
             @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
