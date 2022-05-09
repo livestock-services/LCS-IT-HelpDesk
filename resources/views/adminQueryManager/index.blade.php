@@ -7,7 +7,7 @@
 
             <div class="section-title">
                 <h2>User Queries</h2>
-                <p>All I.T Queries</p>
+                <p>New I.T Queries</p>
             </div>
 
             <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">

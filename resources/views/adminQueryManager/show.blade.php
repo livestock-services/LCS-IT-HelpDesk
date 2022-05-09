@@ -23,7 +23,7 @@
           <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="info">
               <div class="address">
-                <i class="bi bi-geo-alt"></i>
+                <i class="bi bi-info-circle"></i>
                 <h4>Status:</h4>
                 @if($querie->statusId == 3)
                 <p style="color:green;"><b>Completed</b></p>                
@@ -33,12 +33,13 @@
                 <p style="color:red;"><b>Pending</b></p>
                 @endif
               </div>
-
+              @if($querie->statusId == 1)
               <a href="{{route('viewITStaffMembers.index',[$querie->id])}}">
               <div class="email">
-                <i class="bi bi-envelope"></i>
+                <i class="bi bi-briefcase-fill"></i>
                 <h4>Assign To I.T Staff</h4>               
-              </div></a>              
+              </div></a>
+              @endif              
             </div>
           </div>           
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch " data-aos="fade-up" data-aos-delay="100" style="width: -webkit-fill-available;">

@@ -24,7 +24,7 @@
           <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="info">
               <div class="address">
-                <i class="bi bi-geo-alt"></i>
+                <i class="bi bi-info-circle"></i>
                 <h4>Status:</h4>
                 @if($querie->queryType == 1)
                 <p style="color:red;"><b>Pending</b></p>
@@ -37,15 +37,16 @@
 
               
               <div class="email">
-                <i class="bi bi-envelope"></i>
+                <i class="bi bi-briefcase-fill"></i>
                 <h4>Query Assinged to :</h4>
                 <p style="color:blue;"><b>{{$querie->adminName}}</b></p>
               </div>
-
+              @if($querie->queryType == 2)
               <a href="{{ route('adminQueries.clearUserQuery',[$querie->id]) }}"><div class="phone">
-                <i class="bi bi-phone"></i>
+                <i class="bi bi-person-check-fill"></i>
                 <h4 style="color:green;">Clear Query</h4>                
               </div></a>
+              @endif
             </div>
           </div>           
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch " data-aos="fade-up" data-aos-delay="100" style="width: -webkit-fill-available;">

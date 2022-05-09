@@ -60,13 +60,13 @@ class Controller extends BaseController
         }        
     }
 
-    public static function getAssignedQueries(){
+    public static function getAllAssignedorClearedQueries($id){
         $queries = DB::table('queries')
             ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
             ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
             ->join('sub_categories','queries.subCategory','=','sub_categories.id')
             ->join('users','queries.userId','=','users.id')
-            ->where('queries.queryType','=', 2 )                
+            ->where('queries.queryType','=', $id )                
             ->select('users.email','users.name','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
             ->get();
         return $queries;

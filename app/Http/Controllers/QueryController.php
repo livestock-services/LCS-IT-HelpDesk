@@ -170,17 +170,17 @@ class QueryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        
-            $queries = DB::table('queries')
-                ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
-                ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
-                ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-                ->where('queries.id','=', $id)
-                ->select('admins.name','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
-                ->get();
-            return view("query.show")->with('queries',$queries);
-               
+    { 
+              
+        $queries = DB::table('queries')
+            #->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+            #->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->where('queries.id','=', $id)
+            ->select('queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
+            ->get();            
+        #print(($queries)); 
+        return view("query.show")->with('queries',$queries);              
     }
 
     /**

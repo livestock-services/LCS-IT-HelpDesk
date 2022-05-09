@@ -30,7 +30,8 @@ Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
     Route::group(['middleware' => ['auth']], function () { 
         Route::get('createQuery', 'QueryController@create')->name('query.create');
         Route::post('storeQuery', 'QueryController@store')->name('query.store');
-        Route::post('showQuery', 'QueryController@showCategory')->name('query.show');
+        Route::get('showQuery/{id}', 'QueryController@show')->name('query.show');
+        Route::post('showPendingQuery', 'QueryController@showCategory')->name('query.showPendingQuery');
         Route::get('createQueryWithinCategory/{id}', 'QueryController@createQueryWithinCategory')->name('query.createQueryWithinCategory');
         Route::get('indexPendingQuery', 'QueryController@indexPendingQueries')->name('query.indexPendingQueries');
         Route::get('indexAssignedorClearedQueries/{id}', 'QueryController@indexAssignedorClearedQueries')->name('query.indexAssignedorClearedQueries');
@@ -116,14 +117,19 @@ Route::prefix('adminManagement')->namespace('App\Http\Controllers')->group(funct
 
 Route::view('states-city','livewire.home');
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::resources([ 
+        #'query' => QueryController::class
+    ]);
+});
+
 Route::group(['middleware' => ['auth:admin']], function () { 
-    Route::resources([    
-        'query' => QueryController::class,
-        'queryManagent' => QueryCategoryManagementController::class,
-        'quickSolutions' => QuickSolutionsController::class,
-        'subQueryManagent' => QuerySubCategoryManagementController::class,
+    Route::resources([         
+        #'queryManagent' => QueryCategoryManagementController::class,
+        #'quickSolutions' => QuickSolutionsController::class,
+        #'subQueryManagent' => QuerySubCategoryManagementController::class,
         'adminQueryManagement' => AdminQueryController::class,
-        'itStaffManagement' => ITStaffManagementController::class,
+        #'itStaffManagement' => ITStaffManagementController::class,
         //'assignITStaff' => AssignITStaffMemberController::class,
     ]);
 });
@@ -140,17 +146,15 @@ Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(fun
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::group(['middleware' => ['role:Super Admin']], function () {
             Route::get('viewClearedQueries', 'AdminQueryController@indexClearedQueries')->name('clearedQueriesAdmin.index');
-            Route::get('viewNewQueries', 'AdminQueryController@indexNewQueries')->name('newQueriesAdmin.index');
             Route::get('viewAssignedQueries', 'AdminQueryController@indexAssignedQueries')->name('assignedQueries.index');
+            Route::get('viewNewQueries', 'AdminQueryController@indexNewQueries')->name('newQueriesAdmin.index');
             Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
             Route::get('assingItQuery/{query}/{adminId}', 'AdminQueryController@assignQuery')->name('assignQuery.select');
             Route::get('showClearedOrAssignedQueries/{id}', 'AdminQueryController@showPendingQueries')->name('adminQueries.showPendingQueries');
             Route::get('clearUserQuery/{query}', 'AdminQueryController@clearUserQuery')->name('adminQueries.clearUserQuery');
-
         });
-    Route::get('viewAssingedQueries', 'AdminQueryController@indexPendingQueries')->name('yourPendingQueriesAdmin.index');    
-    Route::get('viewYourAssignedQueriesOrClearedQueries/{id}', 'AdminQueryController@indexYourAssignedOrClearedQueries')->name('assignedQueries.indexYourAssignedOrClearedQueries');
-
+        Route::get('viewAssingedQueries', 'AdminQueryController@indexPendingQueries')->name('yourPendingQueriesAdmin.index');    
+        Route::get('viewYourAssignedQueriesOrClearedQueries/{id}', 'AdminQueryController@indexYourAssignedOrClearedQueries')->name('assignedQueries.indexYourAssignedOrClearedQueries');
     });
     //Route::post('adminShowQuery', 'AdminQueryController@show')->name('admin.showQuery');
 });
@@ -159,7 +163,6 @@ Route::prefix('itStaffManagement')->namespace('App\Http\Controllers')->group(fun
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::group(['middleware' => ['role:Super Admin']], function () {
             Route::get('showITStaffMember/{id}','ITStaffManagementController@showITStaffMember')->name('showITStaffMember.show');
-
         });
     });
 });
@@ -169,12 +172,8 @@ use TCG\Voyager\Facades\Voyager;
 
 Route::get('send-email', [SendEmailController::class, 'index']);
 
-
-
-
-
-Route::get('getCategories', 'DynamicCategoryController@getCategories');
-Route::get('getSubCategories', 'DynamicCategoryController@getSubCategories');
+/*Route::get('getCategories', 'DynamicCategoryController@getCategories');
+Route::get('getSubCategories', 'DynamicCategoryController@getSubCategories');*/
 
 Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/users', [UserController::class, 'users']);
@@ -187,23 +186,21 @@ Route::prefix('adminUser')->namespace('App\Http\Controllers\Admin')->group(funct
         Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     });*/   
     //Forgot Password Routes
-    Route::get('/adminDashboard','HomeController@index')->name('admin.home');
-    Route::namespace('Auth')->group(function(){
-        
+    Route::group(['middleware' => ['auth:admin']], function() {
+        Route::get('/adminDashboard','HomeController@index')->name('admin.home');
+    });
+    Route::namespace('Auth')->group(function(){        
         //Login Routes
         Route::get('/login','LoginController@showLoginForm')->name('admin.login');
         Route::post('/login','LoginController@login')->name('admin.login.submit');
-        Route::post('/logout','LoginController@logout')->name('admin.logout');
-    
+        Route::post('/logout','LoginController@logout')->name('admin.logout');    
         //Forgot Password Routes
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
         Route::post('/password/resetsubmit','ForgotPasswordController@showLinkRequestForm')->name('reset.password.submit');
-        Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    
+        Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');    
         //Reset Password Routes
         Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-    
+        Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');    
     });
 });
 

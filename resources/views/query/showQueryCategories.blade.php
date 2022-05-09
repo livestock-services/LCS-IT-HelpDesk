@@ -16,7 +16,7 @@
         @foreach($categories as $categorie)        
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <div class="icon"><i class="bx bxs-message-edit"></i></div>
               <h4 class="title"><a href="{{ route('query.createQueryWithinCategory',[$categorie->id]) }}">{{$categorie->categoryName}}</a></h4>
               <input type="hidden" value="{{ $categorie->id }}" id="categorieId" class="form-control"name="categorieId">
               <p class="description">{{$categorie->categoryDescription}}</p>

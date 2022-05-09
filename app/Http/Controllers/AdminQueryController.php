@@ -36,25 +36,18 @@ class AdminQueryController extends Controller
     }
    
     public function indexAssignedQueries(){       
-        $queries = ControllersController::getAssignedQueries();        
+        $queries = ControllersController::getAllAssignedorClearedQueries(2);        
+        return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
+    }
+    
+    public function indexClearedQueries(){        
+        $queries = ControllersController::getAllAssignedorClearedQueries(3);
         return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
 
     public function indexPendingQueries(){
         $adminId = Auth::id();
         $queries = ControllersController::getAdminPendingQueries($adminId);
-        return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
-    }
-
-    public function indexClearedQueries(){        
-        $queries = DB::table('queries')
-            ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
-            ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
-            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-            ->join('users','queries.userId','=','users.id')
-            ->where('queries.queryType','=', 3 )
-            ->select('users.email','users.name','queries.id','admins.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
-            ->get();
         return view("adminQueryManager.assingedAndClearedQueries")->with('queries',$queries);
     }
 

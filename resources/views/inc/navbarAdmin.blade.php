@@ -50,12 +50,12 @@
           </li>          
           <li class="dropdown"><a href="#"><span>User Management</span> <i class="bi bi-chevron-down"></i></a>
             <ul>              
-              <li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
+              <!----<li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{route ('userRole.create')}}">Create Role</a></li>
                   <li><a href="{{route ('userRole.index')}}">View Roles</a></li>                  
                 </ul>
-              </li>
+              </li>--->
               <li class="dropdown"><a href="#"><span>Staff</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{ route('register') }}">Add User</a></li>              

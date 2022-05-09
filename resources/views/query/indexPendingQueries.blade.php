@@ -15,7 +15,7 @@
             @if(count($queries) > 0)
                 @foreach($queries as $query)
                 <li>
-                <a href="{{$query->id}}"><div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div></a>
+                <a href="{{ route('query.show',[$query->id])}}"><div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$query->queryDetails}}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div></a>
                     <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                         
                         <!---<button type="button" class="btn btn-custom-primary">Button</button>--->

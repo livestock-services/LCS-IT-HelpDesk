@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 @if(count($queries) > 0)
     @foreach($queries as $querie)
     <!-- ======= Contact Us Section ======= -->
@@ -17,14 +18,14 @@
           <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="info">
               <div class="address">
-                <i class="bi bi-geo-alt"></i>
+                <i class="bi bi-info-circle"></i>
                 <h4>Status:</h4>                
                 <p style="color:red;"><b>Pending</b></p>               
               </div>
 
              
               <div class="email">
-                <i class="bi bi-envelope"></i>
+                <i class="bi bi-briefcase-fill"></i>
                 <h4>Assinged To:</h4>
                 <p style="color:red;"><b>Pending</b></p> 
               </div>            
