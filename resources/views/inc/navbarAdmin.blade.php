@@ -1,16 +1,21 @@
-<!---<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
+<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
     <div class="container">
     <a class="navbar-brand" href="{{ url('/home') }}">
-        {{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
-    </a>    
+       
+    
+    </a> 
+    <a class="navbar-brand" href="{{ url('/home') }}">
+       
+    
+    </a>   
 </div>
-</nav>--->
 
+ 
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a href="{{ url('admin.home') }}"><span>IT Help Desk</span></a></h1>
+        <h1 class="text-bold" style="font-weight: Nunito, sans-serif;"><a href="{{ url('admin.home') }}"><span>IT Help Desk</span></a></h1>
 
         <!---<a class="navbar-brand" href="{{ url('/home') }}">
                 {{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
@@ -50,12 +55,12 @@
           </li>          
           <li class="dropdown"><a href="#"><span>User Management</span> <i class="bi bi-chevron-down"></i></a>
             <ul>              
-              <!----<li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
+              <li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{route ('userRole.create')}}">Create Role</a></li>
                   <li><a href="{{route ('userRole.index')}}">View Roles</a></li>                  
                 </ul>
-              </li>--->
+              </li>
               <li class="dropdown"><a href="#"><span>Staff</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{ route('register') }}">Add User</a></li>              
@@ -112,3 +117,4 @@
 
     </div>
   </header>
+</nav>

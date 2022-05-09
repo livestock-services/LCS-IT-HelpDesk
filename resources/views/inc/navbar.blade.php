@@ -1,10 +1,13 @@
-<!--<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
+<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
     <div class="container">
     <a class="navbar-brand" href="{{ url('/home') }}">
-        {{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
-    </a>    
+       
+    </a>   
+    <a class="navbar-brand" href="{{ url('/home') }}">
+       
+    </a> 
+      
 </div>
-</nav>--->
 
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -63,3 +66,4 @@
 
     </div>
   </header>
+</nav>
