@@ -160,7 +160,7 @@ class QueryController extends Controller
         $query->save();
         //Controller::mail();
 
-        return redirect('/home')->with('success','Category Created');
+        return redirect('/home')->with('success','Your Query has been submitted succesfully');
     }
 
     /**

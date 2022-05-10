@@ -104,7 +104,7 @@ class UserManagementController extends Controller
         $updateUserDetails->email = $request->input('email');
         $updateUserDetails->save();
         
-        return redirect()->back();
+        return redirect()->back()->with('success','Updated Successfully');
     }
 
     public function updatePassword(Request $request, $id){
@@ -118,7 +118,7 @@ class UserManagementController extends Controller
         $updateUserDetails->changed_password = True;
         $updateUserDetails->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Updated Successfully');
     }
 
     /**

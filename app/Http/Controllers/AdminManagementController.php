@@ -56,7 +56,7 @@ class AdminManagementController extends Controller
         $userRole = 'Admin';      
         $this->assignAdminRole($userId,$userRole);
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Admin Registered Successfully');
     }
 
     private function deleteUserRole($userId){
@@ -150,7 +150,7 @@ class AdminManagementController extends Controller
         $updateAdminDetails->save();
         $this->deleteUserRole($id);
         $this->assignAdminRole($id,$request->input('userRole'));
-        return redirect()->back();
+        return redirect()->back()->with('success','Updated Successfully');
     }
 
     public function updatePassword(Request $request, $id){
@@ -164,7 +164,7 @@ class AdminManagementController extends Controller
         $updateAdminDetails->changed_password = True;
         $updateAdminDetails->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Updated Successfully');
     }
 
     /**

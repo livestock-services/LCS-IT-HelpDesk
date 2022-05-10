@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
+<nav class="navbar navbar-light bg-light">    
     <div class="container">
     <a class="navbar-brand" href="{{ url('/home') }}">
        
@@ -16,7 +16,7 @@
         <h1 class="text-light"><a href="{{ url('/home') }}"><span>IT Help Desk</span></a></h1>        
       </div>
 
-      <nav id="navbar" class="navbar">
+      
         <ul>
           <li><a class="nav-link scrollto active" href="{{ url('/home') }}">Home</a></li>
           <!---<li><a class="nav-link scrollto" href="{{route ('quick.index')}}">Quick Bar</a></li>--->
@@ -62,7 +62,7 @@
             @endguest
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      
 
     </div>
   </header>

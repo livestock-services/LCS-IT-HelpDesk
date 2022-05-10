@@ -134,7 +134,7 @@ class AdminQueryController extends Controller
         $controller->notifyClearedQueryMail($queryId);
         
         
-        return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Assigned');
+        return redirect('adminQueryManager/viewNewQueries')->with('success', 'Query Cleared');
     }
 
     /**

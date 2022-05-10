@@ -112,7 +112,7 @@ class QueryCategoryManagementController extends Controller
         $categories->categoryDescription = $request->input('categoryDescription');        
         $categories->save();
         
-        return redirect('/queryManagent/indexCategory')->with('success', 'Post Updated');
+        return redirect('/queryManagent/indexCategory')->with('success', 'Category Updated');
     }
 
     /**

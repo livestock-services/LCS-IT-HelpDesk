@@ -1,12 +1,8 @@
-<nav class="navbar navbar-expand-md navbar navbar-dark bg-dark ">    
+<nav class="navbar navbar-light bg-light" id="navbar">    
     <div class="container">
-    <a class="navbar-brand" href="{{ url('/home') }}">
-       
-    
+    <a class="navbar-brand" href="">   
     </a> 
-    <a class="navbar-brand" href="{{ url('/home') }}">
-       
-    
+    <a class="navbar-brand" href="">    
     </a>   
 </div>
 
@@ -15,7 +11,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1 class="text-bold" style="font-weight: Nunito, sans-serif;"><a href="{{ url('admin.home') }}"><span>IT Help Desk</span></a></h1>
+        <h1 class="text-bold" style="font-weight: Nunito, sans-serif;"><a href="{{  route('admin.home') }}"><span>IT Help Desk</span></a></h1>
 
         <!---<a class="navbar-brand" href="{{ url('/home') }}">
                 {{ config('app.name', 'LSC-IT-Help-Desk') }} <span>&#xe081</span>
@@ -24,10 +20,11 @@
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
-      <nav id="navbar" class="navbar">
+      <!---<nav id="navbar" class="navbar">--->
         <ul>
           <li><a class="nav-link scrollto active" href="{{ route('admin.home') }}">Home</a></li>
           <!---<li><a class="nav-link scrollto" href="{{route ('quick.index')}}">Quick Bar</a></li>--->
+          @role('Super Admin')
           <li class="dropdown"><a href="#"><span>I.T Queries</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <!---<li><a href="#">Drop Down 1</a></li>
@@ -46,7 +43,7 @@
               
             </ul>
           </li>
-
+          @endrole
           <li class="dropdown"><a href="#"><span>Your Queries</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',2)}}">Pending I.T Queries</a></li>
@@ -55,32 +52,36 @@
           </li>          
           <li class="dropdown"><a href="#"><span>User Management</span> <i class="bi bi-chevron-down"></i></a>
             <ul>              
-              <li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
+              <!---<li class="dropdown"><a href="#"><span>User Roles</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="{{route ('userRole.create')}}">Create Role</a></li>
                   <li><a href="{{route ('userRole.index')}}">View Roles</a></li>                  
                 </ul>
-              </li>
+              </li>--->
               <li class="dropdown"><a href="#"><span>Staff</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="{{ route('register') }}">Add User</a></li>              
+                  <li><a href="{{ route('register') }}">Add Staff User</a></li>              
                   <li><a href="{{ route('userManagement.index')}}">View Staff Users</a></li>                  
                 </ul>
               </li>
+              @role('Super Admin')
               <li class="dropdown"><a href="#"><span>Admin</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="{{ route('adminManagement.register') }}">Add Admins</a></li>
+                  <li><a href="{{ route('adminManagement.register') }}">Add Admin</a></li>
                   <li><a href="{{ route('adminManagement.index') }}">View Admins</a></li>
                 </ul>
-              </li>              
+              </li>  
+              @endrole            
             </ul>
           </li>
+          @role('Super Admin')
           <li class="dropdown"><a href="#"><span>Query Management</span> <i class="bi bi-chevron-down"></i></a>
             <ul>              
               <li><a href="{{route ('category.create')}}">Create Query Category</a></li>
               <li><a href="{{route ('category.index')}}">View Query Categories</a></li>              
             </ul>
           </li>
+          @endrole
           
           
           <!--<li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
@@ -113,7 +114,7 @@
             @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      <!---</nav><!-- .navbar -->
 
     </div>
   </header>
