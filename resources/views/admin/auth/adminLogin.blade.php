@@ -50,14 +50,7 @@
                 <div class="row align-items-center ">
                     <div class="col-md-3">    
                     </div>
-                    <div class="form-group col-md-auto">
-                        <input  type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    </div>
-                    <div class="form-group col col-lg-2">
-                        <label  for="remember">
-                            {{ __('Remember Me') }}
-                        </label> 
-                    </div>
+                    
                 </div>
             </div>                      
             <div class="my-3">
@@ -73,7 +66,7 @@
                 </button>
                 @if (Route::has('password.request'))
                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
+                        
                     </a>
                 @endif
             </div>
