@@ -93,6 +93,15 @@ class AdminManagementController extends Controller
         //
     }
 
+    public function activateAndDeactivateAdminAccount($adminId,$statusId){
+        
+        $updateAdminDetails = Admin::find($adminId);        
+        $updateAdminDetails->status = $statusId;
+        $updateAdminDetails->save();
+
+        return redirect()->back()->with('success','Successful');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -104,7 +113,7 @@ class AdminManagementController extends Controller
         $adminDetails = Admin::find($id);        
         $userAssignedQueries = Controller::getAdminAssignedorClearedQueries(2,$id);
         $countUserAssignedQueries = count($userAssignedQueries);     
-                
+        #print($adminDetails->status);        
         return view('adminManagement.show')->with('userAssignedQueries', $userAssignedQueries)->with('adminDetails',$adminDetails)->with('userAssignedQueries', $userAssignedQueries)->with('countUserAssignedQueries',$countUserAssignedQueries);
     }
 

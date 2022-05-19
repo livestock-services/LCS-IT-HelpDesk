@@ -83,6 +83,15 @@ class UserManagementController extends Controller
         return view('userManagement.userChangePassword')->with('userDetails',$userDetails);
     }
 
+    public function activateAndDeactivateUserAccount($userId,$statusId){
+        
+        $updateAdminDetails = User::find($userId);        
+        $updateAdminDetails->status = $statusId;
+        $updateAdminDetails->save();
+
+        return redirect()->back()->with('success','Successful');
+    }
+
     /**
      * Update the specified resource in storage.
      *
