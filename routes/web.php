@@ -83,6 +83,19 @@ Route::prefix('userRoleManagement')->namespace('App\Http\Controllers')->group(fu
         });
     });
 });
+Route::group(['middleware' => ['auth']], function () {
+    Route::prefix('userChangePassword')->namespace('App\Http\Controllers')->group(function(){    
+        Route::get('edit', 'UserChangePasswordController@edit')->name('userChangePassword.edit');
+        Route::post('update/{id}', 'UserChangePasswordController@update')->name('userChangePassword.update');
+    });
+});
+
+Route::prefix('adminChangePassword')->namespace('App\Http\Controllers')->group(function(){
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('edit', 'AdminChangePasswordController@edit')->name('adminChangePassword.edit');
+        Route::post('update/{id}', 'AdminChangePasswordController@update')->name('adminChangePassword.update');
+    });
+});
 
 Route::prefix('userManagement')->namespace('App\Http\Controllers')->group(function () {
     Route::group(['middleware' => ['auth:admin']], function () {    

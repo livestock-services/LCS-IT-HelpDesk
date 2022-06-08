@@ -97,7 +97,7 @@
                     {{ Auth::guard('admin')->user()->name }} <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="councilDropdown">
-                    
+                    <a class="dropdown-item" href="{{route ('adminChangePassword.edit')}}">Reset Password<span class="sr-only">(current)</span></a>
                     <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#council-logout-form').submit();">
                         Logout
                     </a>

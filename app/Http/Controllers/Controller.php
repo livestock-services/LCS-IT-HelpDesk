@@ -259,4 +259,20 @@ class Controller extends BaseController
             ->get();
         return $queries;
     }
+
+    public function updateOwnPassword($newPassword, $id){         
+        
+        if(['auth:admin']){
+            $updateUserDetails = Admin::find($id);
+            $updateUserDetails->password = bcrypt($newPassword);
+            $updateUserDetails->changed_password = False;
+            $updateUserDetails->save();
+        }else{
+            $updateUserDetails = User::find($id);
+            $updateUserDetails->password = bcrypt($newPassword);
+            $updateUserDetails->changed_password = False;
+            $updateUserDetails->save();
+        }
+        return $updateUserDetails ;
+    }
 }
