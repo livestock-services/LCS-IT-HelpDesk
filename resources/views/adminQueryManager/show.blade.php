@@ -33,13 +33,29 @@
                 <p style="color:red;"><b>Pending</b></p>
                 @endif
               </div>
+              <div class="email">
+               
+                
+              <a href="{{route('adminQueries.setQueryPriority',[$querie->id])}}">
+              <i class="bi bi-eye-fill"></i>
+                <h4>Priority</h4></h4>
+                @if($querie->priorityCode	== 3)
+                <p style="color:red;"><b>Urgent</b></p>                
+                @elseif($querie->priorityCode	 == 2)
+                <p style="color:red;"><b>Important</b></p>
+                @else
+                <p style="color:red;"><b>Normal</b></p>
+                @endif
+              </a>
+              </div>  
               @if($querie->statusId == 1)
               <a href="{{route('viewITStaffMembers.index',[$querie->id])}}">
               <div class="email">
                 <i class="bi bi-briefcase-fill"></i>
                 <h4>Assign To I.T Staff</h4>               
               </div></a>
-              @endif              
+              @endif 
+                                       
             </div>
           </div>           
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch " data-aos="fade-up" data-aos-delay="100" style="width: -webkit-fill-available;">

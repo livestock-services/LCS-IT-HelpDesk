@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller as ControllersController;
+use App\Models\Priority;
 use App\Models\Query;
 use App\Models\QueryAssignedToTechPersonel;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 class AdminQueryController extends Controller
 {
@@ -93,10 +95,10 @@ class AdminQueryController extends Controller
     public function show($id)
     {
         $queries = DB::table('queries')
-        ->join('sub_categories','queries.subCategory','=','sub_categories.id')
-        ->where('queries.id','=', $id)
-        ->select('queries.queryType','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription')
-        ->get();    
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->where('queries.id','=', $id)
+            ->select('queries.queryType','queries.id','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription','queries.priorityCode')
+            ->get();    
         return view("adminQueryManager.show")->with('queries',$queries);
     }
 
@@ -147,6 +149,44 @@ class AdminQueryController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function getQueryPriority($id){
+        $queries = DB::table('queries')
+            ->where('queries.id','=', $id)
+            ->select('queries.priorityCode')
+            ->get();
+        return $queries[0]->priorityCode;
+    }
+    public function getAllPriorities(){
+        $allPriorities = Priority::all();
+        return $allPriorities;
+    }
+
+    public function setQueryPriority($id){
+        $queries = Query::find($id);
+        $currentQueryPriority = $this->getQueryPriority($id);
+        $getPriorities = $this->getAllPriorities();
+        /*$queries = DB::table('queries')
+            ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+            ->join('priorities','queries.priorityCode','=','priorities.priorityCode')
+            ->where('queries.id','=', $id)
+            ->select('priorities.priorityName','queries.id','queries.queryType','queries.queryDetails','queries.statusId','sub_categories.subCategoryDescription','queries.priorityCode')
+            ->get();*/
+        #print($queries);
+        return view('adminQueryManager.setQueryPriority')->with('queries',$queries)->with('getPriorities',$getPriorities)->with('currentQueryPriority',$currentQueryPriority);
+        #return $currentQueryPriority;
+    }
+
+    public function assignPriority(Request $request, $id){        
+        /*$this->validate($request, [
+            'queryPriority' => 'required'
+        ]);*/
+        $query = Query::find($id); 
+        $query->priorityCode = $request->input('queryPriority'); 
+        $query->save();
+
+        return redirect()->back()->with('success','Priority Updated Successfully');
     }
 
     /**

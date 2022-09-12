@@ -129,6 +129,7 @@ class AdminManagementController extends Controller
         $usersRole = $adminDetails->getRoleNames()[0];       
         $roles = Controller::getAllRoles();
         return view('adminManagement.edit')->with('usersRole',$usersRole)->with('roles',$roles)->with('adminDetails',$adminDetails);
+        #return $usersRole;
     }
 
     public function resetAdminPassword($id){

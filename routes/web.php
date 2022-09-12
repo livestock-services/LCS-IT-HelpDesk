@@ -167,9 +167,11 @@ Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(fun
             Route::get('viewAssignedQueries', 'AdminQueryController@indexAssignedQueries')->name('assignedQueries.index');
             Route::get('viewNewQueries', 'AdminQueryController@indexNewQueries')->name('newQueriesAdmin.index');
             Route::get('showUserQuery/{id}', 'AdminQueryController@show')->name('adminQueries.show');
+            Route::post('assignQueryPriority/{queryId}','AdminQueryController@assignPriority')->name('assignPriority.set');
             Route::get('assingItQuery/{query}/{adminId}', 'AdminQueryController@assignQuery')->name('assignQuery.select');
             Route::get('showClearedOrAssignedQueries/{id}', 'AdminQueryController@showPendingQueries')->name('adminQueries.showPendingQueries');
             Route::get('clearUserQuery/{query}', 'AdminQueryController@clearUserQuery')->name('adminQueries.clearUserQuery');
+            Route::get('setQueryPriority/{query}', 'AdminQueryController@setQueryPriority')->name('adminQueries.setQueryPriority');
         });
         Route::get('viewAssingedQueries', 'AdminQueryController@indexPendingQueries')->name('yourPendingQueriesAdmin.index');    
         Route::get('viewYourAssignedQueriesOrClearedQueries/{id}', 'AdminQueryController@indexYourAssignedOrClearedQueries')->name('assignedQueries.indexYourAssignedOrClearedQueries');

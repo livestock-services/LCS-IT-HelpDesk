@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Query;
 use App\Models\QueryAssignedToTechPersonel;
 use App\Models\Roles;
+use App\Models\Priority;
 use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -248,6 +249,8 @@ class Controller extends BaseController
         $allRoles = Roles::all();
         return $allRoles;
     }
+
+    
 
     public function getPendingQueries($userId){
         $queries = DB::table('queries')
