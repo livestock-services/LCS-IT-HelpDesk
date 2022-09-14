@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Query;
 use App\Models\SubCategory;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -150,7 +151,11 @@ class QueryController extends Controller
         ]);
         //Controller::notifyThatQueryAssingedMail($request->input('categorieId'),$request->input('subCategoryId'));
         //Controller::mail();
-        Controller::notifyMail($request->input('categorieId'),$request->input('subCategoryId'), $request->input('queryDetails'));
+        try{
+            Controller::notifyMail($request->input('categorieId'),$request->input('subCategoryId'), $request->input('queryDetails'));
+        }catch(Exception $e){
+            return redirect()->back()->with('error','Please Select a Category'); 
+        }
         $userId= auth()->user()->id;
         $query = new  Query();
         $query->queryDetails = $request->input('queryDetails');

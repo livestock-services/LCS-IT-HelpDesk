@@ -32,7 +32,8 @@ class LoginController extends Controller
         return $this->loginFailed();*/
 
         if ((Auth::guard('web')->check())) {
-            return redirect('/mistake')->with('error', 'Please logout first');       
+            $this->guard()->logout();
+            return redirect()->back()->with('error','Please logout first');      
         }else{
         $this->validate($request, [
         'email' => 'required|email',
@@ -58,6 +59,7 @@ class LoginController extends Controller
     public function logout()
     {
       //logout the admin...
+        $this->guard()->logout();
         Auth::guard('admin')->logout();
         return redirect()
             ->route('admin.login')
