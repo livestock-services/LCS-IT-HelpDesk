@@ -32,7 +32,7 @@ class LoginController extends Controller
         return $this->loginFailed();*/
 
         if ((Auth::guard('web')->check())) {
-            $this->guard()->logout();
+            Auth::guard('web')->logout();
             return redirect()->back()->with('error','Please logout first');      
         }else{
         $this->validate($request, [
@@ -59,7 +59,7 @@ class LoginController extends Controller
     public function logout()
     {
       //logout the admin...
-        $this->guard()->logout();
+        //$this->guard()->logout();
         Auth::guard('admin')->logout();
         return redirect()
             ->route('admin.login')
