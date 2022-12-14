@@ -19,7 +19,7 @@ class CheckPasswordChange
     {
         /*if(Auth::user()->changed_password == 1){   
             return redirect()->route('userChangePassword.edit')->with('success','Please Update Your Password');         
-            /*if(['auth']){
+            if(['auth']){
                 return redirect()->route('userChangePassword.edit')->with('success','Please Update Your Password');
             }else{
                 return redirect()->route('/adminChangePassword/edit')->with('success','Please Update Your Password');

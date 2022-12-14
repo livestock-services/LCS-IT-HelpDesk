@@ -33,7 +33,7 @@ class LoginController extends Controller
 
         if ((Auth::guard('web')->check())) {
             Auth::guard('web')->logout();
-            return redirect()->back()->with('error','Please logout first');      
+            return redirect()->back()->with('error','You must be logged out first to access this resource.');      
         }else{
         $this->validate($request, [
         'email' => 'required|email',
