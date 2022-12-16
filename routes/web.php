@@ -43,12 +43,13 @@ Route::prefix('query')->namespace('App\Http\Controllers')->group(function () {
 });
 
 Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(function () {
-    Route::group(['middleware' => ['auth:admin']], function () {        
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::get('editCategory/{id}', 'QueryCategoryManagementController@edit')->name('category.edit');  
         Route::get('createCategory', 'QueryCategoryManagementController@create')->name('category.create');
         Route::post('storeCategory', 'QueryCategoryManagementController@store')->name('category.store');
-        Route::post('showCategory', 'QueryCategoryManagementController@showCategory')->name('category.show');
+        Route::get('showCategory/{id}', 'QueryCategoryManagementController@show')->name('category.show');
         Route::get('indexCategory', 'QueryCategoryManagementController@index')->name('category.index');
-        Route::post('updateCategory', 'QueryCategoryManagementController@update')->name('category.update');
+        Route::post('updateCategory/{id}', 'QueryCategoryManagementController@update')->name('category.update');
     });        
     //Route::resource('categoryManagement','CategoryManagementController');
 });

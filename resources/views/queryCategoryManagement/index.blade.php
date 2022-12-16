@@ -9,7 +9,7 @@
 
         <div class="section-title">
           <h2>Querie Categories</h2>
-          <p>View all Query Categories</p>
+          <p>View al Query Categories</p>
         </div>
         <div class="row ">
         @if(count($categories) > 0)
@@ -17,7 +17,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="{{$categorie->id}}">{{$categorie->categoryName}}</a></h4>
+              <h4 class="title"><a href="{{ route('category.show',[$categorie->id]) }}">{{$categorie->categoryName}}</a></h4>
               <input type="hidden" value="{{ $categorie->id }}" id="categorieId" class="form-control"name="categorieId">
               <p class="description">{{$categorie->categoryDescription}}</p>
             </div>

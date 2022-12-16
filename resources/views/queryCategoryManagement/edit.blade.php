@@ -13,10 +13,10 @@
 
         <div class="row">
           <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="2">
-            <form action="/queryManagent/{{$categories->id}}" method="post" role="form" class="php-email-form">
+            <form action="/queryManagent/updateCategory/{{$categories->id}}" method="post" role="form" class="php-email-form">
             @csrf
             {{ csrf_field() }}
-              {{ method_field('PATCH') }}
+              {{ method_field('POST') }}
               <div class="row">
                 <div class="form-group col-md-3">
                   <h5><label for="name" class="form-label">Enter Query Category</label></h5>

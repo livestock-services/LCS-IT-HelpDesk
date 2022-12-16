@@ -21,9 +21,7 @@ class QueryCategoryManagementController extends Controller
         $this->middleware('auth:admin');
     }
     
-    public function index()
-    {
-
+    public function index(){
         $categories = Category::all();
         return view("queryCategoryManagement.index")->with('categories',$categories);
     }
@@ -130,5 +128,13 @@ class QueryCategoryManagementController extends Controller
         return redirect('/queryManagent/indexCategory')->with('success', 'SubCategory Deleted');
         
         //
+    }
+
+
+    public function deletCategory($id){
+
+        $checkIfCategoryHasSubCategory = $this->checkIfCategoryHasSubCategory($id);
+        $categories =  Category::find($id);
+        $categories->delete();
     }
 }

@@ -18,7 +18,7 @@
                 <p>{{$categories->categoryDescription}}</p>
               </div>
 
-              <a href="{{$categories->id}}/edit"><div class="email">
+              <a href="{{ route('category.edit',[$categories->id]) }}"><div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Edit:</h4>
                 <p>Update Category name or Description. Delete Category.</p>
@@ -28,6 +28,12 @@
                 <i class="bi bi-phone"></i>
                 <h4>Add Sub Category:</h4>
                 <p>Register a new Sub Category under {{$categories->categoryName}}</p>
+              </div></a>
+
+              <a href="{{ route('subCategory.create',[$categories->id]) }}"><div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Delete Category:</h4>
+                <p>Ensure that all Sub Categories are deleted before deleting category</p>
               </div></a>
               <!---<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>--->
             </div>

@@ -28,6 +28,11 @@ class Controller extends BaseController
     
     public function checkIfCategoryHasSubCategory($id){
 
+        $countSubCategoriesInCategory = DB::table('sub_categories')
+            ->where('categoryId','=',$id)
+            ->count();
+        
+        return $countSubCategoriesInCategory;
     }
 
     public static function getUsersUnassignedQueries(){
