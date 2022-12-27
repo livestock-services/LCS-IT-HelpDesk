@@ -48,6 +48,7 @@
             <ul>
               <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',2)}}">Pending I.T Queries</a></li>
               <li><a href="{{route ('assignedQueries.indexYourAssignedOrClearedQueries',3)}}">Cleared I.T Queries</a></li>
+              
             </ul>
           </li>          
           <li class="dropdown"><a href="#"><span>User Management</span> <i class="bi bi-chevron-down"></i></a>
@@ -78,7 +79,8 @@
           <li class="dropdown"><a href="#"><span>Query Management</span> <i class="bi bi-chevron-down"></i></a>
             <ul>              
               <li><a href="{{route ('category.create')}}">Create Query Category</a></li>
-              <li><a href="{{route ('category.index')}}">View Query Categories</a></li>              
+              <li><a href="{{route ('category.index')}}">View Query Categories</a></li> 
+              <li><a href="{{route ('adminQueries.reports')}}">Query Reports</a></li>            
             </ul>
           </li>
           @endrole

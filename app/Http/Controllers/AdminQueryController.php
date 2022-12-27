@@ -151,6 +151,28 @@ class AdminQueryController extends Controller
         //
     }
 
+    public function queryReports(){
+        $queries = DB::table('queries')
+        ->join('query_assigned_to_tech_personels','queries.id','=','query_assigned_to_tech_personels.queryId')
+        ->join('admins','query_assigned_to_tech_personels.itPersonelId','=','admins.id')
+        ->join('sub_categories','queries.subCategory','=','sub_categories.id')
+        ->join('users','queries.userId','=','users.id')
+        ->select('users.email',
+                'users.name',
+                'queries.queryType',
+                'queries.id',
+                'queries.priorityCode',
+                'admins.name as adminName',
+                'admins.id as adminId',
+                'queries.queryDetails'
+                ,'queries.statusId',
+                'sub_categories.subCategoryDescription')
+        ->get();
+        print($queries);
+
+        return view("adminQueryManager.queryReports")->with('queries',$queries);
+    }
+
     public function getQueryPriority($id){
         $queries = DB::table('queries')
             ->where('queries.id','=', $id)

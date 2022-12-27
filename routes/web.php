@@ -50,6 +50,7 @@ Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(functio
         Route::get('showCategory/{id}', 'QueryCategoryManagementController@show')->name('category.show');
         Route::get('indexCategory', 'QueryCategoryManagementController@index')->name('category.index');
         Route::post('updateCategory/{id}', 'QueryCategoryManagementController@update')->name('category.update');
+        Route::get('queryReports', 'QueryCategoryManagementController@queryReports')->name('query.reports');
     });        
     //Route::resource('categoryManagement','CategoryManagementController');
 });
@@ -169,6 +170,7 @@ Route::prefix('adminQueryManager')->namespace('App\Http\Controllers')->group(fun
             Route::get('showClearedOrAssignedQueries/{id}', 'AdminQueryController@showPendingQueries')->name('adminQueries.showPendingQueries');
             Route::get('clearUserQuery/{query}', 'AdminQueryController@clearUserQuery')->name('adminQueries.clearUserQuery');
             Route::get('setQueryPriority/{query}', 'AdminQueryController@setQueryPriority')->name('adminQueries.setQueryPriority');
+            Route::get('queryReports', 'AdminQueryController@queryReports')->name('adminQueries.reports');
         });
         Route::get('viewAssingedQueries', 'AdminQueryController@indexPendingQueries')->name('yourPendingQueriesAdmin.index');    
         Route::get('viewYourAssignedQueriesOrClearedQueries/{id}', 'AdminQueryController@indexYourAssignedOrClearedQueries')->name('assignedQueries.indexYourAssignedOrClearedQueries');
