@@ -32,7 +32,9 @@ class Controller extends BaseController
             ->where('categoryId','=',$id)
             ->count();
         
-        return $countSubCategoriesInCategory;
+        print $countSubCategoriesInCategory;
+        
+        #return $countSubCategoriesInCategory;
     }
 
     public static function getUsersUnassignedQueries(){

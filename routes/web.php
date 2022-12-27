@@ -50,6 +50,7 @@ Route::prefix('queryManagent')->namespace('App\Http\Controllers')->group(functio
         Route::get('showCategory/{id}', 'QueryCategoryManagementController@show')->name('category.show');
         Route::get('indexCategory', 'QueryCategoryManagementController@index')->name('category.index');
         Route::post('updateCategory/{id}', 'QueryCategoryManagementController@update')->name('category.update');
+        Route::get('deleteCategory/{id}', 'QueryCategoryManagementController@deleteCategory')->name('category.delete');
     });        
     //Route::resource('categoryManagement','CategoryManagementController');
 });

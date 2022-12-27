@@ -131,10 +131,17 @@ class QueryCategoryManagementController extends Controller
     }
 
 
-    public function deletCategory($id){
+    public function deleteCategory($id){
 
         $checkIfCategoryHasSubCategory = $this->checkIfCategoryHasSubCategory($id);
-        $categories =  Category::find($id);
-        $categories->delete();
+        print($checkIfCategoryHasSubCategory);
+        /*if($checkIfCategoryHasSubCategory > 0){
+            return redirect()->back()->with('error','Please ensure there are no sub categories under the Category');
+        }else{
+            $categories =  Category::find($id);
+            $categories->delete();
+
+            return redirect('/queryManagent/indexCategory')->with('success', 'Category Deleted');
+        }*/
     }
 }
