@@ -30,7 +30,7 @@
                 <p>Register a new Sub Category under {{$categories->categoryName}}</p>
               </div></a>
 
-              <a href="{{ route('subCategory.create',[$categories->id]) }}"><div class="phone">
+              <a href="{{ route('category.delete',[$categories->id]) }}"><div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Delete Category:</h4>
                 <p>Ensure that all Sub Categories are deleted before deleting category</p>
