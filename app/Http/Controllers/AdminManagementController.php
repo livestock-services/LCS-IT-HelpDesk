@@ -54,7 +54,11 @@ class AdminManagementController extends Controller
         $adminUser->save();       
         $userId  = Controller::getUserIdFromManNumber($request->input('manNumber')); 
         $userRole = 'Admin';      
-        $this->assignAdminRole($userId,$userRole);          
+        $this->assignAdminRole($userId,$userRole); 
+        
+        
+        return redirect()->back()->with('success','Admin Registered Sucessfully');
+
     }
 
     private function deleteUserRole($userId){
